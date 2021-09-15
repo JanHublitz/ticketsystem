@@ -1,0 +1,25 @@
+:root {
+       --blue: rgb(23, 91, 183);
+}
+
+.App {
+       width: 100vw;
+       height: 100vh;
+       position: absolute;
+       display: flex;
+}
+
+
+body {
+       margin: 0;
+       top: 0;
+       left: 0;
+       position: absolute;
+}
+
+.main-wrapper {
+       display: flex;
+       width: 100%;
+       height: 100%;
+
+}
