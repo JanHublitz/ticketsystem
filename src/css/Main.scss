@@ -1,1 +1,30 @@
-.Main {}
+.Main {
+    width: 97%;
+    height: 100%;
+    margin-top: 2.5rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.MuiTableRow-root.MuiTableRow-hover.Mui-selected {
+    background-color: var(--blueLight);
+     &:hover {
+         background-color: var(--blue);
+     }
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked {
+    color: white !important;
+}
+
+thead {
+    background-color: var(--blue);
+
+    .MuiSvgIcon-root{
+        color: white;
+    }
+}
+.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignLeft {
+    color: white;
+}
