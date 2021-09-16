@@ -1,0 +1,62 @@
+.sweet-alert {
+       min-width: 50%;
+       height: auto;
+}
+
+
+.Swal {
+       width: 85%;
+       height: 100%;
+
+       .swal-prio-thema-wrapper {
+              display: flex;
+
+              .swal-prio-select {
+                     width: 10%;
+              }
+
+              .swal-thema-tf {
+                     width: 90%;
+                     margin-left: 1rem;
+                     padding-top: 0.5rem;
+              }
+
+       }
+
+       .MuiFormControl-root.MuiTextField-root {
+              width: 100%;
+
+              &.swal-beschreibung-tf {}
+       }
+
+       .swal-beschreibung-tf {
+              margin-top: 2rem;
+       }
+
+       .swal-status-select {
+              margin-top: 2rem;
+              text-align: left;
+              width: 100%;
+       }
+
+       .swal-account-wrapper {
+              display: flex;
+              font-size: 10px;
+
+              .swal-erstellt-tf {
+                     margin-top: 2rem;
+                     margin-right: 1rem;
+              }
+
+              .swal-bearbeitet-tf {
+                     margin-top: 2rem;
+                     margin-left: 1rem;
+              }
+       }
+
+       .swal-footer-buttons-wrapper {
+              .swal-bearbeiten-btn {
+                     margin-top: 2rem;
+              }
+       }
+}

@@ -1,20 +1,19 @@
 import { useState } from "react";
 import "../css/Sidebar.scss"
-import icon from "../assets/align-justify-solid.svg"
-import toggleInIconRight from "../assets/angle-double-right-solid.svg"
-import toggleInIconLeft from "../assets/angle-double-left-solid.svg"
+import DehazeIcon from "@material-ui/icons/Dehaze";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 
 export default function Sidebar() {
 
        const [isIn, setIsIn] = useState(false)
        const [items, setItems] = useState(
-              { 
+              {
                      "Tickets": false,
                      "LoremIpsum1": false,
                      "Loremasdasf": false,
                      "LoasfasfaremIpsum3": false,
                      "Loremafaa": true,
-                     "Lorema": false 
+                     "Lorema": false
               }
        );
 
@@ -22,28 +21,29 @@ export default function Sidebar() {
               setIsIn(!isIn);
        }
 
-       const handleClickItem = (e) => {
+       const handleClickItem = (clickedItem) => {
               let activeElement;
 
               for (const key in items) {
-                     if( items[key] ) {
+                     if (items[key]) {
                             activeElement = key;
+                            break;
                      }
               }
 
-              if(e === activeElement) {
+              if (clickedItem === activeElement) {
                      return;
               }
 
-              setItems( {...items, [activeElement] : false, [e] : true})
+              setItems({ ...items, [activeElement]: false, [clickedItem]: true })
        }
 
        return (
               <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
-                     <img className="toggleInIcon" src={isIn ? toggleInIconRight : toggleInIconLeft} onClick={toggleIsIn}/>
+                     <DoubleArrowIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
                      {Object.keys(items).map(item =>
                             <div className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
-                                   <img src={icon} className="icon" />
+                                   <DehazeIcon className="icon" />
                                    <p className="text">{item}</p>
                             </div>
                      )}
