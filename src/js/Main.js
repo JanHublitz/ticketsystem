@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,
-    TableSortLabel, Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip,
-    makeStyles
+    TableSortLabel, Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip, Box,
+    makeStyles, LinearProgress
 } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -15,20 +15,23 @@ import CreateIcon from '@material-ui/icons/Create';
 import "../css/Main.scss"
 import Alert from './Alert';
 
-function createData(nr, prio, thema, erstellt, status) {
-    return { nr, prio, thema, erstellt, status };
+function createData(nr, prio, thema, kategorie, erstellt, status) {
+    return { nr, prio, thema, kategorie, erstellt, status };
 }
 
 const rows = [
-    createData(11, 1, "Kunden wollen dies und das was sollen wir machen", "21.10.2031 von Jan Hublitz", 1),
-    createData(1831, 3, "Kunden wollen dies und das was sollen wir machen", "22.10.2031 von Jan Hublitz", 2),
-    createData(2314, 2, "ksdoksad dasoksadsao kdsoda ksadoksdifdjjjddsaj dsajsadksjadksjad sadkjsadkjsadkjasajsd kdsajkasjda hallo123", "213wdsaasd von dsaasdjdasasdsad", 3)
+    createData(11, 1, "Kunden wollen dies und das was sollen wir machen", "vertrieb", "21.10.2031 von Jan Hublitz", 1),
+    createData(1831, 3, "Kunden wollen dies und das was sollen wir machen", "technik", "22.10.2031 von Jan Hublitz", 2),
+    createData(13, 1, "Kunden wollen dies und das was sollen wir machen", "technik", "21.10.2031 von Jan Hublitz", 1),
+    createData(2314, 2, "ksdoksad dasoksadsao kdsoda ksadoksdifdjjjddsaj", "gf", "213wdsaasd von dsaasdjdasa", 3),
+    createData(18311, 3, "Kunden wollen dies und das was sollen wir machen", "lager", "22.10.2031 von Jan Hublitz", 2),
 ];
 
 const headCells = [
     { id: 'nr', numeric: false, disablePadding: true, label: '#' },
-    { id: 'prio', numeric: true, disablePadding: false, label: 'Priorität' },
+    { id: 'prio', numeric: true, disablePadding: true, label: 'Priorität' },
     { id: 'thema', numeric: false, disablePadding: false, label: 'Thema' },
+    { id: 'kategorie', numeric: false, disablePadding: false, label: 'Kategorie' },
     { id: 'erstellt', numeric: false, disablePadding: false, label: 'Erstellt' },
     { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
 ];
@@ -58,6 +61,20 @@ function stableSort(array, comparator) {
     });
     return stabilizedThis.map((el) => el[0]);
 }
+
+function LinearProgressWithLabel(props) {
+    return (
+        <Box sx={{ display: 'flex', alignItems: '', flexDirection: "column" }}>
+            <Box sx={{ width: '100%', mr: 1 }}>
+                <LinearProgress variant="determinate" className={"progress p" + props.value} {...props} />
+            </Box>
+            <Box sx={{ minWidth: 35, marginTop: "0.3rem" }}>
+                <Typography variant="body2" >{props.status}</Typography>
+            </Box>
+        </Box>
+    );
+}
+
 
 
 function EnhancedTableHead(props) {
@@ -148,7 +165,7 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                 <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                    {/*TITEL*/}
+                    Ticketsystem
                 </Typography>
             )}
 
@@ -302,9 +319,23 @@ export default function Main() {
         setShowDialog(true);
         setToShowRow(row);
     }
+
+    const switchProgress = (p) => {
+        switch (p) {
+            case 1:
+                return 5;
+            case 2:
+                return 30;
+            case 3:
+                return 100;
+            default:
+                return 0;
+        }
+    }
+
     return (
         <div className="Main">
-            <Alert row={toShowRow} showDialog={showDialog} />
+            <Alert row={toShowRow} showDialog={showDialog} setShowDialog={setShowDialog} />
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
@@ -354,8 +385,17 @@ export default function Main() {
                                             <TableCell align="left">
                                                 <p className="thema" onClick={() => handleClickThema(row)}>{row.thema}</p>
                                             </TableCell>
+                                            <TableCell align="center">
+                                                <p className={`kategorie ${row.kategorie}`}>{row.kategorie}</p>
+                                            </TableCell>
                                             <TableCell align="left">{row.erstellt}</TableCell>
-                                            <TableCell align="left">{statusSwitch(row.status)}</TableCell>
+                                            <TableCell align="left" className="status-wrapper">
+                                                {/* <span className="circle"></span>
+                                                <p className={statusToClass(row.status)}>{statusSwitch(row.status)}</p> */}
+                                                <Box sx={{ width: '100%' }}>
+                                                    <LinearProgressWithLabel value={switchProgress(row.status)} status={statusSwitch(row.status)} />
+                                                </Box>
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}

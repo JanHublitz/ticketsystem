@@ -1,20 +1,34 @@
 import "../css/Alert.scss"
 
 import SweetAlert2 from "react-bootstrap-sweetalert";
-import { MenuItem, TextField, FormControl, InputLabel, Select, InputAdornment, Button } from '@material-ui/core'
+import { MenuItem, TextField, FormControl, InputLabel, Select, InputAdornment, Button, ButtonGroup } from '@material-ui/core'
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh"
 import CreateIcon from "@material-ui/icons/Create"
+import SaveIcon from "@material-ui/icons/Save"
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import CloseIcon from "@material-ui/icons/Close"
 import { useState } from "react";
 
 export default function Alert(props) {
-       const row = props.row;
-       console.log(props.showDialog)
-       const [showDialog, setShowDialog] = useState(props.showDialog);
-       console.log(showDialog)
-       const [isEditing, setEditing] = useState(true);
 
-       const toggleEditing = () => setEditing(!isEditing);
+       const row = props.row;
+       const [prio, setPrio] = useState(props.row.prio)
+       const [status, setStatus] = useState(props.row.status);
+       const [isEditing, setEditing] = useState(true);
+       const [textThema, setTextThema] = useState(props.row.thema);
+
+       const toggleEditing = () => {
+              if (!isEditing) {
+                     //SPEICHERN
+              }
+
+              setEditing(!isEditing);
+       }
+
+       const handleExit = () => {
+              props.setShowDialog(false);
+              setEditing(true);
+       }
 
 
        const statusSwitch = (s) => {
@@ -30,35 +44,41 @@ export default function Alert(props) {
               }
        }
 
+       const handleChangePrio = (e) => setPrio(e.target.value);
+
+       const handleTFThema = (e) => setTextThema(e.target.value);
+
        return (
               <SweetAlert2
-                     show={showDialog}
-                     onConfirm={() => setShowDialog(false)}
+                     title=""
+                     show={props.showDialog}
+                     showConfirm={false}
+                     onConfirm={() => { }}
               >
                      <div className="Swal">
                             <div className="swal-prio-thema-wrapper">
-                                   <FormControl className="swal-prio-select">
+                                   <FormControl variant="standard" className="swal-prio-select">
                                           <InputLabel id="demo-simple-select-helper-label">Priorität</InputLabel>
                                           <Select
                                                  labelId="demo-simple-select-helper-label"
                                                  id="demo-simple-select-helper"
-                                                 value={row.prio}
+                                                 value={prio}
                                                  defaultValue={row.prio}
-                                                 label="Age"
                                                  disabled={isEditing}
-                                                 onChange={() => { }}
+                                                 onChange={handleChangePrio}
                                           >
-                                                 <MenuItem value={1}><PriorityHighIcon className="priority low" /> </MenuItem>
-                                                 <MenuItem value={2}><PriorityHighIcon className="priority medium" /> </MenuItem>
+                                                 <MenuItem id="JANHAHA" value={1}><PriorityHighIcon className="priority low" /> </MenuItem>
+                                                 <MenuItem id="JANHAHA2" value={2}><PriorityHighIcon className="priority medium" /> </MenuItem>
                                                  <MenuItem value={3}><PriorityHighIcon className="priority high" /> </MenuItem>
                                           </Select>
                                    </FormControl>
                                    <TextField
                                           disabled={isEditing}
                                           id="outlined-disabled"
-                                          label={`Thema #${row.nr}`}
+                                          label={`Ticket #${row.nr}`}
                                           defaultValue={row.thema}
                                           className="swal-thema-tf"
+                                          onChange={handleTFThema}
                                    />
                             </div>
                             <TextField
@@ -71,12 +91,24 @@ export default function Alert(props) {
                                    defaultValue="Lorlisis arcu et dictum finibus. Nam urna tortor, feugiat non mauris quis, acc sapien, sit amet suscipit urna."
                                    className="swal-beschreibung-tf"
                             />
-                            <TextField className="swal-status-select"
-                                   label="Beschreibung"
-                                   id="demo-simple-select-helper"
-                                   value={statusSwitch(row.status)}
-                                   disabled
-                            />
+                            <div className="status-wrapper">
+                                   <TextField className="swal-status-select"
+                                          label="Status"
+                                          id="demo-simple-select-helper"
+                                          value={statusSwitch(status)}
+                                          disabled
+                                   />
+                                   <ButtonGroup
+                                          variant="text"
+                                          aria-label="outlined button group"
+                                          disabled={isEditing}
+                                          className="status-btngrp"
+                                   >
+                                          <Button className="status-btngrp-btn" onClick={() => setStatus(1)}>Als neu markieren</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => setStatus(2)}>Ticket bearbeiten</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => setStatus(3)}>Als fertig markieren</Button>
+                                   </ButtonGroup>
+                            </div>
 
                             <div className="swal-account-wrapper">
                                    <TextField
@@ -112,8 +144,11 @@ export default function Alert(props) {
                             </div>
 
                             <div className="swal-footer-buttons-wrapper">
-                                   <Button className="swal-bearbeiten-btn" variant="contained" endIcon={<CreateIcon />} onClick={toggleEditing}>
-                                          Bearbeiten
+                                   <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={isEditing ? <CreateIcon /> : <SaveIcon />} onClick={toggleEditing}>
+                                          {isEditing ? "Bearbeiten" : "Speichern"}
+                                   </Button>
+                                   <Button className="swal-schliessen-btn" variant="contained" endIcon={<CloseIcon />} onClick={handleExit}>
+                                          Schließen
                                    </Button>
                             </div>
                      </div>

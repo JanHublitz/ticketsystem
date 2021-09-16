@@ -42,7 +42,7 @@ export default function Sidebar() {
               <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
                      <DoubleArrowIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
                      {Object.keys(items).map(item =>
-                            <div className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
+                            <div key={item} className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
                                    <DehazeIcon className="icon" />
                                    <p className="text">{item}</p>
                             </div>

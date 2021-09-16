@@ -5,8 +5,10 @@
 
 
 .Swal {
-       width: 85%;
+       max-width: 100%;
        height: 100%;
+       margin: 1rem;
+
 
        .swal-prio-thema-wrapper {
               display: flex;
@@ -33,15 +35,36 @@
               margin-top: 2rem;
        }
 
-       .swal-status-select {
-              margin-top: 2rem;
-              text-align: left;
-              width: 100%;
+       .status-wrapper {
+              display: flex;
+
+              .swal-status-select {
+                     margin-top: 2rem;
+                     margin-right: 1rem;
+                     text-align: left;
+                     width: 50%;
+              }
+
+              .status-btngrp {
+                     width: 50%;
+                     height: 3rem;
+                     margin-left: 1rem;
+                     align-self: flex-end;
+
+                     .status-btngrp-btn {
+                            font-size: 11px;
+                            padding-right: 1.5rem;
+                            padding-left: 1.5rem;
+                            text-align: center;
+
+                     }
+              }
        }
 
        .swal-account-wrapper {
               display: flex;
               font-size: 10px;
+              margin-top: 2rem;
 
               .swal-erstellt-tf {
                      margin-top: 2rem;
@@ -55,8 +78,24 @@
        }
 
        .swal-footer-buttons-wrapper {
+              display: flex;
+
               .swal-bearbeiten-btn {
-                     margin-top: 2rem;
+                     margin-top: 3rem;
+                     border: 1px solid var(--blue);
+                     color: var(--blue);
+              }
+
+              .swal-schliessen-btn {
+                     margin-top: 3rem;
+                     margin-left: 1.5rem;
+                     background-color: var(--blue);
+                     color: white;
+
               }
        }
+}
+
+#JANHAHA2 {
+       position: absolute;
 }

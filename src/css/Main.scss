@@ -30,7 +30,18 @@ thead {
 }
 
 .MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignLeft {
-       color: white;
+       color: white !important;
+       font-weight: bolder;
+}
+
+.MuiTableSortLabel-root.MuiTableSortLabel-active {
+       font-weight: bolder;
+       color: white !important;
+}
+
+.MuiButtonBase-root.MuiTableSortLabel-root {
+       font-weight: bolder;
+       color: white !important;
 }
 
 .deleteIcon {
@@ -43,20 +54,77 @@ thead {
 }
 
 .priority {
+       border-radius: 50%;
+
        &.low {
-              color: rgb(31, 175, 31);
+              background-color: rgb(31, 175, 31);
+              color: white;
        }
 
        &.medium {
-              color: rgb(231, 150, 19);
+              background-color: rgb(212, 131, 0);
+              color: white;
        }
 
        &.high {
-              color: rgb(189, 0, 88);
+              background-color: rgb(255, 65, 65);
+              color: white;
        }
+}
+
+.thema {
+       color: grey;
+       font-weight: bolder;
 }
 
 .thema:hover {
        cursor: pointer;
        text-decoration: underline;
+}
+
+.kategorie {
+       text-transform: uppercase;
+       border-radius: 0.3rem;
+       font-weight: bolder;
+       font-size: 10px;
+       padding: 0.1rem;
+       box-shadow: 3px 3px 5px -3px #111;
+
+       &.gf {
+              background-color: rgb(86, 205, 50);
+       }
+
+       &.technik {
+              background-color: red;
+              color: white;
+       }
+
+       &.vertrieb {
+              background-color: rgb(32, 109, 144);
+              color: white;
+       }
+
+       &.lager {
+              background-color: black;
+              color: white;
+       }
+}
+
+
+.progress.p100 {
+       .MuiLinearProgress-barColorPrimary {
+              background-color: green !important;
+       }
+}
+
+.progress.p30 {
+       .MuiLinearProgress-barColorPrimary {
+              background-color: orange !important;
+       }
+}
+
+.progress.p5 {
+       .MuiLinearProgress-barColorPrimary {
+              background-color: var(--blue) !important;
+       }
 }
