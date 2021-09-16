@@ -1,7 +1,9 @@
 import "../css/Alert.scss"
-
-import SweetAlert2 from "react-bootstrap-sweetalert";
-import { MenuItem, TextField, FormControl, InputLabel, Select, InputAdornment, Button, ButtonGroup } from '@material-ui/core'
+import {
+       MenuItem, TextField, FormControl, InputLabel, Select,
+       InputAdornment, Button, ButtonGroup, OutlinedInput,
+       Dialog,
+} from '@material-ui/core'
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh"
 import CreateIcon from "@material-ui/icons/Create"
 import SaveIcon from "@material-ui/icons/Save"
@@ -16,6 +18,7 @@ export default function Alert(props) {
        const [status, setStatus] = useState(props.row.status);
        const [isEditing, setEditing] = useState(true);
        const [textThema, setTextThema] = useState(props.row.thema);
+       const [personName, setPersonName] = useState([]);
 
        const toggleEditing = () => {
               if (!isEditing) {
@@ -48,16 +51,29 @@ export default function Alert(props) {
 
        const handleTFThema = (e) => setTextThema(e.target.value);
 
+       const handleChangeVerantwortlich = (e) => {
+              const { target: { value }, } = e;
+              setPersonName(typeof value === 'string' ? value.split(',') : value,);
+       }
+
+       const names = [
+              "Jan Hublitz",
+              "Ralf Hublitz",
+              "Andrea Reichenauer"
+       ];
+
+
        return (
-              <SweetAlert2
-                     title=""
-                     show={props.showDialog}
-                     showConfirm={false}
-                     onConfirm={() => { }}
+              <Dialog
+                     open={props.showDialog}
+                     onClose={handleExit}
+                     aria-labelledby="alert-dialog-title"
+                     aria-describedby="alert-dialog-description"
+                     className="Dialog"
               >
                      <div className="Swal">
                             <div className="swal-prio-thema-wrapper">
-                                   <FormControl variant="standard" className="swal-prio-select">
+                                   <FormControl fullWidth className="swal-prio-select">
                                           <InputLabel id="demo-simple-select-helper-label">Priorität</InputLabel>
                                           <Select
                                                  labelId="demo-simple-select-helper-label"
@@ -67,8 +83,8 @@ export default function Alert(props) {
                                                  disabled={isEditing}
                                                  onChange={handleChangePrio}
                                           >
-                                                 <MenuItem id="JANHAHA" value={1}><PriorityHighIcon className="priority low" /> </MenuItem>
-                                                 <MenuItem id="JANHAHA2" value={2}><PriorityHighIcon className="priority medium" /> </MenuItem>
+                                                 <MenuItem value={1}><PriorityHighIcon className="priority low" /> </MenuItem>
+                                                 <MenuItem value={2}><PriorityHighIcon className="priority medium" /> </MenuItem>
                                                  <MenuItem value={3}><PriorityHighIcon className="priority high" /> </MenuItem>
                                           </Select>
                                    </FormControl>
@@ -76,7 +92,7 @@ export default function Alert(props) {
                                           disabled={isEditing}
                                           id="outlined-disabled"
                                           label={`Ticket #${row.nr}`}
-                                          defaultValue={row.thema}
+                                          defaultValue={textThema}
                                           className="swal-thema-tf"
                                           onChange={handleTFThema}
                                    />
@@ -109,6 +125,29 @@ export default function Alert(props) {
                                           <Button className="status-btngrp-btn" onClick={() => setStatus(3)}>Als fertig markieren</Button>
                                    </ButtonGroup>
                             </div>
+
+                            <FormControl className="verwantwortlich-select">
+                                   <InputLabel className="label" id="demo-multiple-name-label">Verwantwortlich:</InputLabel>
+                                   <Select
+                                          labelId="demo-multiple-name-label"
+                                          id="demo-multiple-name"
+                                          multiple
+                                          disabled={isEditing}
+                                          value={personName}
+                                          onChange={handleChangeVerantwortlich}
+                                          input={<OutlinedInput label="Verantwortlich:" />}
+                                   >
+                                          {names.map((name) => (
+                                                 <MenuItem
+                                                        key={name}
+                                                        value={name}
+                                                 >
+                                                        {name}
+                                                 </MenuItem>
+                                          ))}
+                                   </Select>
+                            </FormControl>
+
 
                             <div className="swal-account-wrapper">
                                    <TextField
@@ -152,6 +191,6 @@ export default function Alert(props) {
                                    </Button>
                             </div>
                      </div>
-              </SweetAlert2>
+              </Dialog>
        );
 }

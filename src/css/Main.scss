@@ -9,11 +9,11 @@
 
 .MuiTableRow-root.MuiTableRow-hover.Mui-selected {
 
-       background-color: var(--blueLight);
+       background-color: rgb(231, 231, 231);
 
 
        &:hover {
-              background-color: var(--blue);
+              background-color: rgb(231, 231, 231);
        }
 }
 
