@@ -41,6 +41,8 @@
               align-items: center;
               font-weight: bold;
               word-wrap: normal;
+              transition: all 500ms ease-in-out;
+
 
               &.active {
                      background-color: var(--blue);

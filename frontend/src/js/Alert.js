@@ -13,11 +13,9 @@ import { useState } from "react";
 
 export default function Alert(props) {
 
-       const row = props.row;
-       const [prio, setPrio] = useState(props.row.prio)
-       const [status, setStatus] = useState(props.row.status);
+       console.log(props.row)
+
        const [isEditing, setEditing] = useState(true);
-       const [textThema, setTextThema] = useState(props.row.thema);
        const [personName, setPersonName] = useState([]);
 
        const toggleEditing = () => {
@@ -47,13 +45,13 @@ export default function Alert(props) {
               }
        }
 
-       const handleChangePrio = (e) => setPrio(e.target.value);
+       const handleChangePrio = (e) => props.setPrio(e.target.value);
 
-       const handleTFThema = (e) => setTextThema(e.target.value);
+       const handleTFThema = (e) => props.setTextThema(e.target.value);
 
        const handleChangeVerantwortlich = (e) => {
               const { target: { value }, } = e;
-              setPersonName(typeof value === 'string' ? value.split(',') : value,);
+              props.setPersonName(typeof value === 'string' ? value.split(',') : value,);
        }
 
        const names = [
@@ -78,8 +76,8 @@ export default function Alert(props) {
                                           <Select
                                                  labelId="demo-simple-select-helper-label"
                                                  id="demo-simple-select-helper"
-                                                 value={prio}
-                                                 defaultValue={row.prio}
+                                                 value={props.prio}
+                                                 defaultValue={props.row.prio}
                                                  disabled={isEditing}
                                                  onChange={handleChangePrio}
                                           >
@@ -91,8 +89,8 @@ export default function Alert(props) {
                                    <TextField
                                           disabled={isEditing}
                                           id="outlined-disabled"
-                                          label={`Ticket #${row.nr}`}
-                                          defaultValue={textThema}
+                                          label={`Ticket #${props.row.nr}`}
+                                          defaultValue={props.row.thema}
                                           className="swal-thema-tf"
                                           onChange={handleTFThema}
                                    />
@@ -111,7 +109,7 @@ export default function Alert(props) {
                                    <TextField className="swal-status-select"
                                           label="Status"
                                           id="demo-simple-select-helper"
-                                          value={statusSwitch(status)}
+                                          value={statusSwitch(props.row.status)}
                                           disabled
                                    />
                                    <ButtonGroup
@@ -120,9 +118,9 @@ export default function Alert(props) {
                                           disabled={isEditing}
                                           className="status-btngrp"
                                    >
-                                          <Button className="status-btngrp-btn" onClick={() => setStatus(1)}>Als neu markieren</Button>
-                                          <Button className="status-btngrp-btn" onClick={() => setStatus(2)}>Ticket bearbeiten</Button>
-                                          <Button className="status-btngrp-btn" onClick={() => setStatus(3)}>Als fertig markieren</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => props.row.setStatus(1)}>Als neu markieren</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => props.row.setStatus(2)}>Ticket bearbeiten</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => props.row.setStatus(3)}>Als fertig markieren</Button>
                                    </ButtonGroup>
                             </div>
 
