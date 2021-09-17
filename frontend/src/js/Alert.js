@@ -15,6 +15,7 @@ export default function Alert(props) {
 
        const [ticket, setTicket] = useState(props.ticket);
        const [isEditing, setEditing] = useState(true);
+       const [showFazit, setShowFazit] = useState(false);
 
        useEffect(() => {
               setTicket(props.ticket)
@@ -33,6 +34,7 @@ export default function Alert(props) {
        const handleExit = () => {
               props.setShowDialog(false);
               setEditing(true);
+              setShowFazit(false);
        }
 
 
@@ -67,6 +69,11 @@ export default function Alert(props) {
 
        const handleChangeStatus = (num) => {
               setTicket({ ...ticket, status: num });
+              if (num === 3) {
+                     setShowFazit(true);
+              } else {
+                     setShowFazit(false)
+              }
        }
 
        const names = [
@@ -139,6 +146,18 @@ export default function Alert(props) {
                                           <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(3)}>Als fertig markieren</Button>
                                    </ButtonGroup>
                             </div>
+
+                            {showFazit ? <TextField
+                                   id="outlined-multiline-static"
+                                   label="Fazit"
+                                   multiline
+                                   disabled={isEditing}
+                                   rows={4}
+                                   variant="filled"
+                                   value={ticket.fazit || ""}
+                                   onChange={() => { }}
+                                   className="swal-beschreibung-tf"
+                            /> : null}
 
                             <FormControl className="verwantwortlich-select">
                                    <InputLabel className="label" id="demo-multiple-name-label">Verwantwortlich:</InputLabel>

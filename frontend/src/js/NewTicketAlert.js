@@ -3,6 +3,9 @@ import {
        MenuItem, TextField, FormControl, InputLabel, Select,
        Button, OutlinedInput,
        Dialog,
+       Switch,
+       FormGroup,
+       FormControlLabel,
 } from '@material-ui/core'
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh"
 import SaveIcon from "@material-ui/icons/Save"
@@ -28,19 +31,6 @@ export default function NewTicketAlert(props) {
               props.setShowNewTicketDialog(false);
        }
 
-
-       const statusSwitch = (s) => {
-              switch (s) {
-                     case 1:
-                            return "Neu"
-                     case 2:
-                            return "In Bearbeitung von:"
-                     case 3:
-                            return "Fertig gestellt von:"
-                     default:
-                            return "Fehler"
-              }
-       }
 
        const handleChangePrio = (e) => {
               setTicket({ ...ticket, prioritaet: e.target.value });
@@ -127,6 +117,13 @@ export default function NewTicketAlert(props) {
                                           ))}
                                    </Select>
                             </FormControl>
+                            {
+                                   ticket.verantwortlich.length >= 1 ?
+                                          <FormGroup>
+                                                 <FormControlLabel control={<Switch defaultChecked />} label="Versende Email an jeden Beteiligten" />
+                                          </FormGroup>
+                                          : null
+                            }
 
 
                             <div className="swal-footer-buttons-wrapper">

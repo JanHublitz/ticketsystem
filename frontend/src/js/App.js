@@ -11,17 +11,21 @@ export default function App() {
 
        const [view, setView] = useState("Tickets");
        const [MainView, setMainView] = useState(<Ticketsystem />)
+       const [isMainView, setIsMainView] = useState(true);
 
        useEffect(() => {
               switch (view) {
                      case "Tickets":
                             setMainView(<Ticketsystem />);
+                            setIsMainView(true);
                             break;
                      case "Wiki":
                             setMainView(<Wiki />);
+                            setIsMainView(false);
                             break;
                      default:
                             setMainView(<Ticketsystem />)
+                            setIsMainView(true);
                             break;
               }
        }, [view])
@@ -34,7 +38,7 @@ export default function App() {
                                    <Topbar />
                                    <div className="main-sidebar-wrapper">
                                           {MainView}
-                                          <SidebarRight />
+                                          {isMainView ? <SidebarRight /> : null}
                                    </div>
                             </div>
                      </div>
