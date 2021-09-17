@@ -5,6 +5,7 @@ import Wiki from './Wiki';
 import { useEffect, useState } from 'react';
 import Ticketsystem from './Ticketsystem';
 import { SnackbarProvider } from 'notistack';
+import SidebarRight from './SidebarRight';
 
 export default function App() {
 
@@ -12,7 +13,6 @@ export default function App() {
        const [MainView, setMainView] = useState(<Ticketsystem />)
 
        useEffect(() => {
-              console.log(view)
               switch (view) {
                      case "Tickets":
                             setMainView(<Ticketsystem />);
@@ -32,7 +32,10 @@ export default function App() {
                             <Sidebar setView={setView} />
                             <div className="main-wrapper">
                                    <Topbar />
-                                   {MainView}
+                                   <div className="main-sidebar-wrapper">
+                                          {MainView}
+                                          <SidebarRight />
+                                   </div>
                             </div>
                      </div>
               </SnackbarProvider>

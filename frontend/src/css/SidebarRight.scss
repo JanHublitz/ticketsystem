@@ -1,0 +1,25 @@
+.SidebarRight {
+       height: 100%;
+       width: 1px;
+       transition: all 0.5s cubic-bezier(0, .91, .46, 1.34);
+       border: 1px solid red;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+
+       p {
+              display: none;
+       }
+
+       &.isOut {
+              width: 20%;
+
+              p {
+                     display: block;
+              }
+       }
+
+       .form-sidebar-right {
+              width: 80%;
+       }
+}

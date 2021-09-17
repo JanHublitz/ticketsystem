@@ -14,11 +14,13 @@ import { useState, useEffect } from "react";
 export default function Alert(props) {
 
        const [ticket, setTicket] = useState(props.ticket);
-
+       const creationMode = props.creationMode;
+       const setCreationMode = props.setCreationMode;
        const [isEditing, setEditing] = useState(true);
 
        useEffect(() => {
               setTicket(props.ticket)
+              setTicket({ ...ticket, verantwortlich: [] })
        }, [props]);
 
 
@@ -33,6 +35,7 @@ export default function Alert(props) {
        const handleExit = () => {
               props.setShowDialog(false);
               setEditing(true);
+              setCreationMode(creationMode);
        }
 
 
@@ -50,31 +53,23 @@ export default function Alert(props) {
        }
 
        const handleChangePrio = (e) => {
-              setTicket({ ...ticket, prio: e.target.value });
-              console.log({ ...ticket, prio: e.target.value })
+              setTicket({ ...ticket, prioritaet: e.target.value });
        }
 
        const handleTFThema = (e) => {
               setTicket({ ...ticket, thema: e.target.value });
-              console.log({ ...ticket, thema: e.target.value })
        }
 
        const handleChangeVerantwortlich = (e) => {
-              // const { target: { value }, } = e;
-              // let name = typeof value === 'string' ? value.split(',') : value
-              // console.log(name)
               setTicket({ ...ticket, verantwortlich: e.target.value });
-              console.log({ ...ticket, verantwortlich: e.target.value })
        }
 
        const handleChangeBeschreibung = (e) => {
               setTicket({ ...ticket, beschreibung: e.target.value });
-              console.log({ ...ticket, beschreibung: e.target.value })
        }
 
        const handleChangeStatus = (num) => {
               setTicket({ ...ticket, status: num });
-              console.log({ ...ticket, status: num })
        }
 
        const names = [
@@ -99,8 +94,7 @@ export default function Alert(props) {
                                           <Select
                                                  labelId="demo-simple-select-helper-label"
                                                  id="demo-simple-select-helper"
-                                                 value={ticket.prio}
-                                                 defaultValue={ticket.prio}
+                                                 value={ticket.prioritaet}
                                                  disabled={isEditing}
                                                  onChange={handleChangePrio}
                                           >
@@ -112,7 +106,7 @@ export default function Alert(props) {
                                    <TextField
                                           disabled={isEditing}
                                           id="outlined-disabled"
-                                          label={`Ticket #${ticket.nr}`}
+                                          label={`Ticket #${ticket.id}`}
                                           defaultValue={ticket.thema}
                                           className="swal-thema-tf"
                                           onChange={handleTFThema}
@@ -129,24 +123,25 @@ export default function Alert(props) {
                                    onChange={handleChangeBeschreibung}
                                    className="swal-beschreibung-tf"
                             />
-                            <div className="status-wrapper">
-                                   <TextField className="swal-status-select"
-                                          label="Status"
-                                          id="demo-simple-select-helper"
-                                          value={statusSwitch(ticket.status)}
-                                          disabled
-                                   />
-                                   <ButtonGroup
-                                          variant="text"
-                                          aria-label="outlined button group"
-                                          disabled={isEditing}
-                                          className="status-btngrp"
-                                   >
-                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(1)}>Als neu markieren</Button>
-                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(2)}>Ticket bearbeiten</Button>
-                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(3)}>Als fertig markieren</Button>
-                                   </ButtonGroup>
-                            </div>
+                            {!creationMode ?
+                                   <div className="status-wrapper">
+                                          <TextField className="swal-status-select"
+                                                 label="Status"
+                                                 id="demo-simple-select-helper"
+                                                 value={statusSwitch(ticket.status)}
+                                                 disabled
+                                          />
+                                          <ButtonGroup
+                                                 variant="text"
+                                                 aria-label="outlined button group"
+                                                 disabled={isEditing}
+                                                 className="status-btngrp"
+                                          >
+                                                 <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(1)}>Als neu markieren</Button>
+                                                 <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(2)}>Ticket bearbeiten</Button>
+                                                 <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(3)}>Als fertig markieren</Button>
+                                          </ButtonGroup>
+                                   </div> : null}
 
                             <FormControl className="verwantwortlich-select">
                                    <InputLabel className="label" id="demo-multiple-name-label">Verwantwortlich:</InputLabel>
@@ -205,9 +200,14 @@ export default function Alert(props) {
                             </div>
 
                             <div className="swal-footer-buttons-wrapper">
-                                   <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={isEditing ? <CreateIcon /> : <SaveIcon />} onClick={toggleEditing}>
-                                          {isEditing ? "Bearbeiten" : "Speichern"}
-                                   </Button>
+                                   {creationMode ?
+                                          <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={isEditing ? <CreateIcon /> : <SaveIcon />} onClick={toggleEditing}>
+                                                 {isEditing ? "Bearbeiten" : "Speichern"}
+                                          </Button> :
+                                          <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={<SaveIcon />} onClick={() => { }}>
+                                                 Neues Ticket anlegen
+                                          </Button>
+                                   }
                                    <Button className="swal-schliessen-btn" variant="contained" endIcon={<CloseIcon />} onClick={handleExit}>
                                           Schließen
                                    </Button>

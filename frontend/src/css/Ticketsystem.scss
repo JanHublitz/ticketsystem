@@ -1,10 +1,10 @@
 .Main {
-       width: 97%;
+       width: 96%;
        height: 100%;
        margin-top: 2.5rem;
        overflow-y: auto;
-       padding-right: 0.5rem;
-       padding-left: 0.5rem;
+       padding-right: 2rem;
+       padding-left: 2rem;
 }
 
 .MuiTableRow-root.MuiTableRow-hover.Mui-selected {
@@ -127,4 +127,14 @@ thead {
        .MuiLinearProgress-barColorPrimary {
               background-color: var(--blue) !important;
        }
+}
+
+.add-ticket-btn {
+       font-size: 12px !important;
+       width: 20% !important;
+       background-color: white !important;
+       color: var(--blue) !important;
+       border-color: var(--blue) !important;
+       font-weight: bolder !important;
+       margin-right: 3rem !important;
 }

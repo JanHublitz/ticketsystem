@@ -30,6 +30,8 @@ public class Ticket {
     private int prioritaet;
     private String beschreibung;
     @NotNull
+    private String kategorie;
+    @NotNull
     private int status;
     private String verantwortlich;
     @NotBlank
