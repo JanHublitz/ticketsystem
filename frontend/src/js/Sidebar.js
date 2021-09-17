@@ -24,7 +24,7 @@ export default function Sidebar(props) {
 
        const toggleIsIn = () => {
               setIsIn(!isIn);
-              document.documentElement.style.setProperty("--blue", "rgb(255,0,0)")
+              //document.documentElement.style.setProperty("--blue", "rgb(255,0,0)")
        }
 
        const handleClickItem = (clickedItem) => {
