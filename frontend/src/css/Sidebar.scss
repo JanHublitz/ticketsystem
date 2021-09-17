@@ -4,12 +4,14 @@ img {
        left: 0;
        width: 15rem;
        height: 70%;
+       animation: fadeIn 0.5s;
 }
 
 .Sidebar {
        width: 20rem;
        height: 100%;
-       transition: all 0.5s cubic-bezier(0, .91, .46, 1.34);
+       // transition: all 0.5s cubic-bezier(0, .91, .46, 1.34);
+       transition: all 0.5s cubic-bezier(.02, .92, .65, .5);
        word-wrap: normal;
        overflow-x: hidden;
        display: flex;
@@ -35,9 +37,11 @@ img {
               background-color: white;
               border-bottom-left-radius: 0.3rem;
               border-top-left-radius: 0.3rem;
+              transition: all 0.5s cubic-bezier(.02, .92, .65, .5);
 
               span {
                      margin-left: 2rem;
+                     font-size: 12px;
               }
 
               .account-icon {
@@ -51,8 +55,9 @@ img {
               width: 5rem;
               background-color: white;
 
-              .account-icon {
-                     color: black;
+              .user-wrapper {
+                     color: white;
+                     background-color: var(--blue);
               }
 
               .toggleInIcon {
@@ -60,6 +65,7 @@ img {
               }
 
               .item {
+                     transition: all 0.5s cubic-bezier(.02, .92, .65, .5);
 
                      .icon {
                             color: black;
@@ -122,7 +128,7 @@ img {
               align-items: center;
               font-weight: bold;
               word-wrap: normal;
-              transition: all 500ms ease-in-out;
+              transition: all 0.5s cubic-bezier(.02, .92, .65, .5);
               border-top-right-radius: 0;
               border-bottom-right-radius: 0;
 
