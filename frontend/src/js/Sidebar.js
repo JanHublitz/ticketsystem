@@ -4,8 +4,9 @@ import DehazeIcon from "@material-ui/icons/Dehaze";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import HelpIcon from "@material-ui/icons/Help";
 
-export default function Sidebar() {
+export default function Sidebar(props) {
 
+       const setView = props.setView;
        const [isIn, setIsIn] = useState(false)
        const [items, setItems] = useState(
               {
@@ -33,6 +34,7 @@ export default function Sidebar() {
               }
 
               setItems({ ...items, [activeElement]: false, [clickedItem]: true })
+              setView(clickedItem)
        }
 
        const iconSwitch = (name) => {

@@ -2,7 +2,7 @@ import "../css/Alert.scss"
 import {
        MenuItem, TextField, FormControl, InputLabel, Select,
        InputAdornment, Button, ButtonGroup, OutlinedInput,
-       Dialog,
+       Dialog, Switch, FormGroup, FormControlLabel
 } from '@material-ui/core'
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh"
 import CreateIcon from "@material-ui/icons/Create"
@@ -12,8 +12,6 @@ import CloseIcon from "@material-ui/icons/Close"
 import { useState } from "react";
 
 export default function Alert(props) {
-
-       console.log(props.row)
 
        const [isEditing, setEditing] = useState(true);
        const [personName, setPersonName] = useState([]);
@@ -49,9 +47,13 @@ export default function Alert(props) {
 
        const handleTFThema = (e) => props.setTextThema(e.target.value);
 
+       const handleBeschreibung = (e) => props.setBeschreibung(e.target.value);
+
+       const handleChangeStatus = (e) => props.setStatus(e);
+
        const handleChangeVerantwortlich = (e) => {
               const { target: { value }, } = e;
-              props.setPersonName(typeof value === 'string' ? value.split(',') : value,);
+              setPersonName(typeof value === 'string' ? value.split(',') : value,);
        }
 
        const names = [
@@ -100,6 +102,7 @@ export default function Alert(props) {
                                    label="Beschreibung"
                                    multiline
                                    disabled={isEditing}
+                                   onChange={handleBeschreibung}
                                    rows={4}
                                    variant="filled"
                                    defaultValue="Lorlisis arcu et dictum finibus. Nam urna tortor, feugiat non mauris quis, acc sapien, sit amet suscipit urna."
@@ -118,14 +121,14 @@ export default function Alert(props) {
                                           disabled={isEditing}
                                           className="status-btngrp"
                                    >
-                                          <Button className="status-btngrp-btn" onClick={() => props.row.setStatus(1)}>Als neu markieren</Button>
-                                          <Button className="status-btngrp-btn" onClick={() => props.row.setStatus(2)}>Ticket bearbeiten</Button>
-                                          <Button className="status-btngrp-btn" onClick={() => props.row.setStatus(3)}>Als fertig markieren</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(1)}>Als neu markieren</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(2)}>Ticket bearbeiten</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(3)}>Als fertig markieren</Button>
                                    </ButtonGroup>
                             </div>
 
                             <FormControl className="verwantwortlich-select">
-                                   <InputLabel className="label" id="demo-multiple-name-label">Verwantwortlich:</InputLabel>
+                                   <InputLabel className="label" id="demo-multiple-name-label">Beteiligte:</InputLabel>
                                    <Select
                                           labelId="demo-multiple-name-label"
                                           id="demo-multiple-name"
@@ -145,7 +148,17 @@ export default function Alert(props) {
                                           ))}
                                    </Select>
                             </FormControl>
-
+                            <FormGroup className="send-email-switch-wrapper">
+                                   <FormControlLabel 
+                                          control={
+                                                 <Switch  
+                                                        disabled={personName.length < 1}
+                                                        className="send-email-switch"
+                                                 />
+                                          } 
+                                          className="send-email-switch-label" 
+                                          label="Versende Email an jeden Beteiligten" />
+                            </FormGroup>
 
                             <div className="swal-account-wrapper">
                                    <TextField

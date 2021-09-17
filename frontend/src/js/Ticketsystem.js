@@ -12,7 +12,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import CreateIcon from '@material-ui/icons/Create';
 
-import "../css/Main.scss"
+import "../css/Ticketsystem.scss"
 import Alert from './Alert';
 
 function createData(nr, prio, thema, kategorie, erstellt, status) {
@@ -224,7 +224,7 @@ const useStyles = makeStyles((theme) => ({
        },
 }));
 
-export default function Main() {
+export default function Ticketsystem() {
        const classes = useStyles();
        const [order, setOrder] = useState('asc');
        const [orderBy, setOrderBy] = useState('nr');
@@ -233,6 +233,10 @@ export default function Main() {
        const [rowsPerPage, setRowsPerPage] = useState(rows.length);
        const [showDialog, setShowDialog] = useState(false);
        const [toShowRow, setToShowRow] = useState(rows[0]);
+       const [prio, setPrio] = useState(1);
+       const [thema, setTextThema] = useState("");
+       const [beschreibung, setBeschreibung] = useState("");
+       const [status, setStatus] = useState(1);
 
        const handleRequestSort = (event, property) => {
               const isAsc = orderBy === property && order === 'asc';
@@ -242,7 +246,7 @@ export default function Main() {
 
        const handleSelectAllClick = (event) => {
               if (event.target.checked) {
-                     const newSelecteds = rows.map((n) => n.name);
+                     const newSelecteds = rows.map((n) => n.nr);
                      setSelected(newSelecteds);
                      return;
               }
@@ -316,7 +320,6 @@ export default function Main() {
 
 
        const handleClickThema = (row) => {
-              console.log(row)
               setToShowRow(row);
               setShowDialog(true);
        }
@@ -334,9 +337,19 @@ export default function Main() {
               }
        }
 
+       
+
        return (
               <div className="Main">
-                     <Alert row={toShowRow} showDialog={showDialog} setShowDialog={setShowDialog} />
+                     <Alert 
+                            row={toShowRow} 
+                            showDialog={showDialog} 
+                            setShowDialog={setShowDialog} 
+                            setPrio={setPrio}
+                            setTextThema={setTextThema}
+                            setBeschreibung={setBeschreibung}
+                            setStatus={setStatus}
+                     />
                      <Paper className={classes.paper}>
                             <EnhancedTableToolbar numSelected={selected.length} />
                             <TableContainer>

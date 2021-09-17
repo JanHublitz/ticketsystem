@@ -72,6 +72,22 @@
               }
        }
 
+       .send-email-switch-wrapper {
+              .send-email-switch {
+                     .MuiSwitch-colorSecondary.Mui-checked {
+                            color: var(--blue);
+                     }
+                     .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+                            background-color: var(--blue);
+                     }
+              }
+              .send-email-switch-label {
+                     span {
+                            font-size: 12px;
+                     }
+              }
+       }
+
        .swal-account-wrapper {
               display: flex;
               font-size: 10px;
