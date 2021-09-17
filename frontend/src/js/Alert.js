@@ -14,13 +14,11 @@ import { useState, useEffect } from "react";
 export default function Alert(props) {
 
        const [ticket, setTicket] = useState(props.ticket);
-       const creationMode = props.creationMode;
-       const setCreationMode = props.setCreationMode;
        const [isEditing, setEditing] = useState(true);
 
        useEffect(() => {
               setTicket(props.ticket)
-              setTicket({ ...ticket, verantwortlich: [] })
+              setTicket({ ...props.ticket, verantwortlich: [] })
        }, [props]);
 
 
@@ -35,7 +33,6 @@ export default function Alert(props) {
        const handleExit = () => {
               props.setShowDialog(false);
               setEditing(true);
-              setCreationMode(creationMode);
        }
 
 
@@ -123,25 +120,25 @@ export default function Alert(props) {
                                    onChange={handleChangeBeschreibung}
                                    className="swal-beschreibung-tf"
                             />
-                            {!creationMode ?
-                                   <div className="status-wrapper">
-                                          <TextField className="swal-status-select"
-                                                 label="Status"
-                                                 id="demo-simple-select-helper"
-                                                 value={statusSwitch(ticket.status)}
-                                                 disabled
-                                          />
-                                          <ButtonGroup
-                                                 variant="text"
-                                                 aria-label="outlined button group"
-                                                 disabled={isEditing}
-                                                 className="status-btngrp"
-                                          >
-                                                 <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(1)}>Als neu markieren</Button>
-                                                 <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(2)}>Ticket bearbeiten</Button>
-                                                 <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(3)}>Als fertig markieren</Button>
-                                          </ButtonGroup>
-                                   </div> : null}
+
+                            <div className="status-wrapper">
+                                   <TextField className="swal-status-select"
+                                          label="Status"
+                                          id="demo-simple-select-helper"
+                                          value={statusSwitch(ticket.status)}
+                                          disabled
+                                   />
+                                   <ButtonGroup
+                                          variant="text"
+                                          aria-label="outlined button group"
+                                          disabled={isEditing}
+                                          className="status-btngrp"
+                                   >
+                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(1)}>Als neu markieren</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(2)}>Ticket bearbeiten</Button>
+                                          <Button className="status-btngrp-btn" onClick={() => handleChangeStatus(3)}>Als fertig markieren</Button>
+                                   </ButtonGroup>
+                            </div>
 
                             <FormControl className="verwantwortlich-select">
                                    <InputLabel className="label" id="demo-multiple-name-label">Verwantwortlich:</InputLabel>
@@ -200,14 +197,10 @@ export default function Alert(props) {
                             </div>
 
                             <div className="swal-footer-buttons-wrapper">
-                                   {creationMode ?
-                                          <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={isEditing ? <CreateIcon /> : <SaveIcon />} onClick={toggleEditing}>
-                                                 {isEditing ? "Bearbeiten" : "Speichern"}
-                                          </Button> :
-                                          <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={<SaveIcon />} onClick={() => { }}>
-                                                 Neues Ticket anlegen
-                                          </Button>
-                                   }
+
+                                   <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={isEditing ? <CreateIcon /> : <SaveIcon />} onClick={toggleEditing}>
+                                          {isEditing ? "Bearbeiten" : "Speichern"}
+                                   </Button> :
                                    <Button className="swal-schliessen-btn" variant="contained" endIcon={<CloseIcon />} onClick={handleExit}>
                                           Schließen
                                    </Button>

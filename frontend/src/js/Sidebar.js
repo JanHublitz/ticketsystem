@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Divider } from "@material-ui/core";
 import "../css/Sidebar.scss"
 import DehazeIcon from "@material-ui/icons/Dehaze";
-import DoubleArrowRoundedIcon from "@material-ui/icons/DoubleArrowRounded";
+import DoubleArrowRoundedIcon from "@material-ui/icons/ArrowForwardIos";
 import HelpIcon from "@material-ui/icons/Help";
 import reactPng from "../assets/react.png";
 import muiPng from "../assets/mui.png";

@@ -17,6 +17,7 @@ body {
        top: 0;
        left: 0;
        position: absolute;
+       overflow-x: hidden;
 }
 
 .main-wrapper {
@@ -30,5 +31,4 @@ body {
 .main-sidebar-wrapper {
        width: 100%;
        display: flex;
-       justify-content: space-between;
 }

@@ -26,7 +26,7 @@ export default function SidebarRight() {
 
 
        const [prio, setPrio] = useState(0);
-       const [kategorie, setKategorie] = useState(kategorien[0])
+       const [kategorie, setKategorie] = useState(0)
        const [status, setStatus] = useState(0);
 
 

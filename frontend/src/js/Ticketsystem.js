@@ -24,6 +24,7 @@ const headCells = [
        { id: 'thema', numeric: false, disablePadding: false, label: 'Thema' },
        { id: 'kategorie', numeric: false, disablePadding: false, label: 'Kategorie' },
        { id: 'erstellt', numeric: false, disablePadding: false, label: 'Erstellt' },
+       { id: 'bearbeitet', numeric: false, disablePadding: false, label: 'Bearbeitet' },
        { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
 ];
 
@@ -208,7 +209,7 @@ export default function Main() {
 
        const handleSelectAllClick = (event) => {
               if (event.target.checked) {
-                     const newSelecteds = rows.map((n) => n.name);
+                     const newSelecteds = rows.map((n) => n.id);
                      setSelected(newSelecteds);
                      return;
               }
@@ -314,7 +315,7 @@ export default function Main() {
                                           </Typography>
                                    ) : (
                                           <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                                                 Ticketsystem
+                                                 <span style={{ color: "var(--blue)" }}>Ticketsystem</span>
                                           </Typography>
                                    )}
                                    {selected.length < 1 ?
@@ -401,7 +402,8 @@ export default function Main() {
                                                                              <TableCell align="center">
                                                                                     <p className={`kategorie ${row.kategorie.toLowerCase()}`}>{row.kategorie}</p>
                                                                              </TableCell>
-                                                                             <TableCell align="left">{row.datum + " von " + row.autor}</TableCell>
+                                                                             <TableCell align="left">{row.erstellt + " von " + row.erstellt_von}</TableCell>
+                                                                             <TableCell align="left">{row.bearbeitet + " von " + row.bearbeitet_von}</TableCell>
                                                                              <TableCell align="left" className="status-wrapper">
                                                                                     <Box sx={{ width: '100%' }}>
                                                                                            <LinearProgressWithLabel value={switchProgress(row.status)} status={statusSwitch(row.status)} />
@@ -419,9 +421,9 @@ export default function Main() {
                                    </Table>
                             </TableContainer>
                             <TablePagination
-                                   rowsPerPageOptions={[rows.length, 10, 25, 100]}
+                                   rowsPerPageOptions={[rows.length || 5, 10, 25]}
                                    component="div"
-                                   count={rows.length}
+                                   count={rows.length || 5}
                                    rowsPerPage={rowsPerPage}
                                    page={page}
                                    onPageChange={handleChangePage}

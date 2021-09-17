@@ -13,12 +13,13 @@
        }
 
        .toggleInIcon {
-              width: 40px;
-              height: 40px;
+              width: 35px;
+              height: 35px;
               cursor: pointer;
               align-self: flex-end;
               margin-right: 1rem;
               margin-top: 1rem;
+              margin-bottom: 2rem;
               transition: all 500ms ease-in-out;
 
               &.left {
