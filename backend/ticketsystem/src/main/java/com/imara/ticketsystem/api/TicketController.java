@@ -1,12 +1,9 @@
 package com.imara.ticketsystem.api;
-
 import com.imara.ticketsystem.model.Ticket;
 import com.imara.ticketsystem.service.TicketService;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/api")
@@ -26,6 +23,7 @@ public class TicketController {
         return service.saveTickets(tickets);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tickets")
     public List<Ticket> findAllTickets() {
         return service.getTickets();

@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -18,14 +18,17 @@ import Alert from './Alert';
 function createData(nr, prio, thema, kategorie, datum, autor, status, beschreibung, verantwortlich) {
 	return { nr, prio, thema, kategorie, datum, autor, status, beschreibung, verantwortlich };
 }
-
+/*
 const rows = [
-	createData(11, 1, "Kunden wollen dies und das 1 was sollen wir machen", "vertrieb", "21.10.2031", "Jan Hublitz", 1, "beschreibung hier ... :)", ["Jan Hublitz"]),
-	createData(1831, 3, "Kunden wollen dies und das 2 was sollen wir machen", "technik", "22.10.2031", "Jan Hublitz", 2, "beschreibung hier ... :)", ["Jan Hublitz"]),
-	createData(13, 1, "Kunden wollen dies und das 3 was sollen wir machen", "technik", "27.01.2031", "Jan Hublitz", 1, "beschreibung hier ... :)", ["Jan Hublitz"]),
-	createData(2314, 2, "ksdoksad dasoksadsao kdsoda ksadoksdifdjjjddsaj", "gf", "01.01.1999", "dsaasdjdasa", 3, "beschreibung hier ... :)", ["Jan Hublitz"]),
-	createData(18311, 3, "Kunden wollen dies und das 4 was sollen wir machen", "lager", "22.10.2031", "Jan Hublitz", 2, "beschreibung hier ... :)", ["Jan Hublitz"]),
+	   
+	   createData(11, 1, "Kunden wollen dies und das 1 was sollen wir machen", "vertrieb", "21.10.2031", "Jan Hublitz", 1, "beschreibung hier ... :)", ["Jan Hublitz"]),
+	   createData(1831, 3, "Kunden wollen dies und das 2 was sollen wir machen", "technik", "22.10.2031", "Jan Hublitz", 2, "beschreibung hier ... :)", ["Jan Hublitz"]),
+	   createData(13, 1, "Kunden wollen dies und das 3 was sollen wir machen", "technik", "27.01.2031", "Jan Hublitz", 1, "beschreibung hier ... :)", ["Jan Hublitz"]),
+	   createData(2314, 2, "ksdoksad dasoksadsao kdsoda ksadoksdifdjjjddsaj", "gf", "01.01.1999", "dsaasdjdasa", 3, "beschreibung hier ... :)", ["Jan Hublitz"]),
+	   createData(18311, 3, "Kunden wollen dies und das 4 was sollen wir machen", "lager", "22.10.2031", "Jan Hublitz", 2, "beschreibung hier ... :)", ["Jan Hublitz"]),
+	   
 ];
+*/
 
 const headCells = [
 	{ id: 'nr', numeric: false, disablePadding: true, label: '#' },
@@ -230,9 +233,45 @@ export default function Main() {
 	const [orderBy, setOrderBy] = useState('nr');
 	const [selected, setSelected] = useState([]);
 	const [page, setPage] = useState(0);
+	const [rows, setRows] = useState([])
 	const [rowsPerPage, setRowsPerPage] = useState(rows.length);
 	const [showDialog, setShowDialog] = useState(false);
 	const [toShowRow, setToShowRow] = useState(rows[0]);
+
+	//createData(nr, prio, thema, kategorie, datum, autor, status, beschreibung, verantwortlich)
+	useEffect(() => {
+		const fetchData = async () => {
+			await fetch("http://localhost:3001/api/tickets", { method: "GET" })
+				.then(response => response.json())
+				.then(data => {
+					setRows(data);
+					console.log(rows)
+				})
+			/*{
+		    
+			var _rows = []
+			for (var i = 0; i < data.length; i++) {
+				   var datai = data[i];
+				   _rows.push(
+						  createData(
+								 datai["id"],
+								 datai["prioritaet"],
+								 datai["thema"],
+								 "HIER STEHT KATEGORIE HEHE",
+								 datai["bearbeitet"],
+								 datai["erstellt"],
+								 datai["status"],
+								 datai["beschreibung"],
+								 datai["verantwortlich"]
+						  )
+				   )
+			}
+			setRows(_rows);
+			console.log(rows)
+	})*/
+		}
+		fetchData();
+	}, []);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
@@ -335,7 +374,7 @@ export default function Main() {
 
 	return (
 		<div className="Main">
-			<Alert ticket={toShowRow} showDialog={showDialog} setShowDialog={setShowDialog} />
+			{/* <Alert ticket={toShowRow} showDialog={showDialog} setShowDialog={setShowDialog} /> */}
 			<Paper className={classes.paper}>
 				<EnhancedTableToolbar numSelected={selected.length} />
 				<TableContainer>
@@ -415,6 +454,6 @@ export default function Main() {
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
 			</Paper>
-		</div>
+		</div >
 	);
 }
