@@ -71,14 +71,6 @@ export default function Sidebar(props) {
                                           <p className="text">{item}</p>
                                    </div>
                             )}
-                            {/* <Divider /> */}
-                            {isIn ? null :
-                                   <div className="Sidebar-footer">
-                                          <img id="react" className="powered-logo" src={reactPng} alt="" />
-                                          <img id="mui" className="powered-logo" src={muiPng} alt="" />
-                                          <img id="springboot" className="powered-logo" src={springbootPng} alt="" />
-                                          <img id="mysql" className="powered-logo" src={mysqlSvg} alt="" />
-                                   </div>}
                      </div >
               </Fragment>
        );
