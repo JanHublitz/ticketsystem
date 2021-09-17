@@ -7,6 +7,7 @@ import Ticketsystem from './Ticketsystem';
 import { SnackbarProvider } from 'notistack';
 import SidebarRight from './SidebarRight';
 
+
 export default function App() {
 
        const [view, setView] = useState("Tickets");
@@ -35,7 +36,6 @@ export default function App() {
                      <div className="App">
                             <Sidebar setView={setView} />
                             <div className="main-wrapper">
-                                   <Topbar />
                                    <div className="main-sidebar-wrapper">
                                           {MainView}
                                           {isMainView ? <SidebarRight /> : null}

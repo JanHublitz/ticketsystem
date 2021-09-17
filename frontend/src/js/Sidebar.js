@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Divider } from "@material-ui/core";
 import "../css/Sidebar.scss"
 import DehazeIcon from "@material-ui/icons/Dehaze";
@@ -8,6 +8,8 @@ import reactPng from "../assets/react.png";
 import muiPng from "../assets/mui.png";
 import springbootPng from "../assets/springboot.png";
 import mysqlSvg from "../assets/mysql.svg"
+import us from "../assets/us.png"
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 export default function Sidebar(props) {
 
@@ -22,6 +24,7 @@ export default function Sidebar(props) {
 
        const toggleIsIn = () => {
               setIsIn(!isIn);
+              document.documentElement.style.setProperty("--blue", "rgb(255,0,0)")
        }
 
        const handleClickItem = (clickedItem) => {
@@ -54,22 +57,29 @@ export default function Sidebar(props) {
        }
 
        return (
-              <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
-                     <DoubleArrowRoundedIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
-                     {Object.keys(items).map(item =>
-                            <div key={item} className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
-                                   {iconSwitch(item)}
-                                   <p className="text">{item}</p>
+              <Fragment>
+                     {!isIn ? <img src={us} alt="" /> : null}
+                     <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
+                            <DoubleArrowRoundedIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
+                            <div className="user-wrapper">
+                                   <AccountCircle className="account-icon" />
+                                   {!isIn ? <span >Jan Hublitz</span> : null}
                             </div>
-                     )}
-                     {/* <Divider /> */}
-                     {isIn ? null :
-                            <div className="Sidebar-footer">
-                                   <img id="react" className="powered-logo" src={reactPng} alt="" />
-                                   <img id="mui" className="powered-logo" src={muiPng} alt="" />
-                                   <img id="springboot" className="powered-logo" src={springbootPng} alt="" />
-                                   <img id="mysql" className="powered-logo" src={mysqlSvg} alt="" />
-                            </div>}
-              </div >
+                            {Object.keys(items).map(item =>
+                                   <div key={item} className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
+                                          {iconSwitch(item)}
+                                          <p className="text">{item}</p>
+                                   </div>
+                            )}
+                            {/* <Divider /> */}
+                            {isIn ? null :
+                                   <div className="Sidebar-footer">
+                                          <img id="react" className="powered-logo" src={reactPng} alt="" />
+                                          <img id="mui" className="powered-logo" src={muiPng} alt="" />
+                                          <img id="springboot" className="powered-logo" src={springbootPng} alt="" />
+                                          <img id="mysql" className="powered-logo" src={mysqlSvg} alt="" />
+                                   </div>}
+                     </div >
+              </Fragment>
        );
 }

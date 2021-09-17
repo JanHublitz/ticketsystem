@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import {
        Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,
        TableSortLabel, Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip, Box,
-       makeStyles, LinearProgress, Button
+       makeStyles, LinearProgress, Button, Dialog, MenuItem, FormHelperText, Select, InputLabel, FormControl
 } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -12,6 +12,8 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import AddIcon from '@material-ui/icons/Add';
 import SyncIcon from '@material-ui/icons/Sync';
+import SettingsIcon from "@material-ui/icons/Settings"
+
 
 import "../css/Ticketsystem.scss"
 import Alert from './Alert';
@@ -184,6 +186,7 @@ export default function Main() {
        const [showNewTicketDialog, setShowNewTicketDialog] = useState(false);
        const [toShowRow, setToShowRow] = useState(rows[0]);
        const [creationMode, setCreationMode] = useState(false);
+       const [openSettingsDialog, setOpenSettingsDialog] = useState(false);
 
 
        useEffect(() => {
@@ -299,8 +302,29 @@ export default function Main() {
               }
        }
 
+       const handleSettings = () => {
+              setOpenSettingsDialog(true);
+       }
+
        return (
               <div className="Main">
+                     <Dialog open={openSettingsDialog} className="dialog-settings">
+                            <FormControl sx={{ m: 1, minWidth: 120 }} className="form-settings">
+                                   <InputLabel id="demo-simple-select-helper-label">Theme-Farbe auswählen</InputLabel>
+                                   <Select
+                                          labelId="demo-simple-select-helper-label"
+                                          id="demo-simple-select-helper"
+                                          value=""
+                                          label="Age"
+                                          onChange=""
+                                   >
+                                          <MenuItem style={{ backgroundColor: "rgb(100,23,1)" }} value=""></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "rgb(100,23,255)" }} value={10}></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "rgb(255,23,1)" }} value={20}></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "rgb(0,23,100)" }} value={30}></MenuItem>
+                                   </Select>
+                            </FormControl>
+                     </Dialog>
                      {toShowRow ? <Alert setCreationMode={setCreationMode} creationMode={creationMode} ticket={toShowRow} showDialog={showDialog} setShowDialog={setShowDialog} /> : null}
                      <NewTicketAlert showNewTicketDialog={showNewTicketDialog} setShowNewTicketDialog={setShowNewTicketDialog} />
                      <Paper className={classes.paper}>
@@ -328,6 +352,11 @@ export default function Main() {
                                                  Neues Ticket anlegen
                                           </Button> : null
                                    }
+                                   <Tooltip title="Einstellungen">
+                                          <IconButton aria-label="delete" onClick={handleSettings}>
+                                                 <SettingsIcon className="SyncIcon" />
+                                          </IconButton>
+                                   </Tooltip>
 
                                    {selected.length < 1 ?
                                           <Tooltip title="Aktualisieren">

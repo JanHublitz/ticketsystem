@@ -5,6 +5,21 @@
        overflow-y: auto;
        padding-right: 2rem;
        padding-left: 2rem;
+
+
+}
+
+.dialog-settings {
+       .form-settings {
+              height: 100px;
+              width: 50%;
+
+
+       }
+
+       .MuiMenuItem-root {
+              min-height: 150px !important;
+       }
 }
 
 .MuiTableRow-root.MuiTableRow-hover.Mui-selected {
