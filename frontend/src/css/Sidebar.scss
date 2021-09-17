@@ -30,7 +30,7 @@ img {
               text-transform: uppercase;
               margin-right: 0rem;
               margin-left: 1rem;
-              margin-bottom: 1rem;
+              margin-bottom: 2rem;
               padding-top: 0.3rem;
               padding-bottom: 0.3rem;
               padding-left: 0.3rem;
@@ -51,9 +51,11 @@ img {
        }
 
        &.isIn {
-              box-shadow: 5px 0px 10px -10px rgb(51, 51, 51);
+              box-shadow: 15px 0px 5px -15px #111;
               width: 5rem;
               background-color: white;
+
+              border-right: 4px solid var(--blue);
 
               .user-wrapper {
                      color: white;
