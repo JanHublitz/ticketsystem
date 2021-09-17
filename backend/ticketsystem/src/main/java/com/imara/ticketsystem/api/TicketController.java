@@ -36,12 +36,12 @@ public class TicketController {
         return service.getTicketById(id);
     }
 
-    @PutMapping(path = "/update")
+    @PutMapping(path = "/ticket/update")
     public Ticket updateTicket(@RequestBody Ticket ticket) {
         return service.updateTicket(ticket);
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/ticket/delete/{id}")
     public String deleteTicket(@PathVariable("id") int id) {
         return service.deleteTicket(id);
     }
