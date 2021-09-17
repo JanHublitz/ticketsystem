@@ -2,19 +2,25 @@ import "../css/Alert.scss"
 import {
        MenuItem, TextField, FormControl, InputLabel, Select,
        InputAdornment, Button, ButtonGroup, OutlinedInput,
-       Dialog, Switch, FormGroup, FormControlLabel
+       Dialog,
 } from '@material-ui/core'
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh"
 import CreateIcon from "@material-ui/icons/Create"
 import SaveIcon from "@material-ui/icons/Save"
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import CloseIcon from "@material-ui/icons/Close"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Alert(props) {
 
+       const [ticket, setTicket] = useState(props.ticket);
+
        const [isEditing, setEditing] = useState(true);
-       const [personName, setPersonName] = useState([]);
+
+       useEffect(() => {
+              setTicket(props.ticket)
+       }, [props]);
+
 
        const toggleEditing = () => {
               if (!isEditing) {
@@ -39,21 +45,36 @@ export default function Alert(props) {
                      case 3:
                             return "Fertig gestellt von:"
                      default:
-                            return "Neu"
+                            return "Fehler"
               }
        }
 
-       const handleChangePrio = (e) => props.setPrio(e.target.value);
+       const handleChangePrio = (e) => {
+              setTicket({ ...ticket, prio: e.target.value });
+              console.log({ ...ticket, prio: e.target.value })
+       }
 
-       const handleTFThema = (e) => props.setTextThema(e.target.value);
-
-       const handleBeschreibung = (e) => props.setBeschreibung(e.target.value);
-
-       const handleChangeStatus = (e) => props.setStatus(e);
+       const handleTFThema = (e) => {
+              setTicket({ ...ticket, thema: e.target.value });
+              console.log({ ...ticket, thema: e.target.value })
+       }
 
        const handleChangeVerantwortlich = (e) => {
-              const { target: { value }, } = e;
-              setPersonName(typeof value === 'string' ? value.split(',') : value,);
+              // const { target: { value }, } = e;
+              // let name = typeof value === 'string' ? value.split(',') : value
+              // console.log(name)
+              setTicket({ ...ticket, verantwortlich: e.target.value });
+              console.log({ ...ticket, verantwortlich: e.target.value })
+       }
+
+       const handleChangeBeschreibung = (e) => {
+              setTicket({ ...ticket, beschreibung: e.target.value });
+              console.log({ ...ticket, beschreibung: e.target.value })
+       }
+
+       const handleChangeStatus = (num) => {
+              setTicket({ ...ticket, status: num });
+              console.log({ ...ticket, status: num })
        }
 
        const names = [
@@ -78,8 +99,8 @@ export default function Alert(props) {
                                           <Select
                                                  labelId="demo-simple-select-helper-label"
                                                  id="demo-simple-select-helper"
-                                                 value={props.prio}
-                                                 defaultValue={props.row.prio}
+                                                 value={ticket.prio}
+                                                 defaultValue={ticket.prio}
                                                  disabled={isEditing}
                                                  onChange={handleChangePrio}
                                           >
@@ -91,8 +112,8 @@ export default function Alert(props) {
                                    <TextField
                                           disabled={isEditing}
                                           id="outlined-disabled"
-                                          label={`Ticket #${props.row.nr}`}
-                                          defaultValue={props.row.thema}
+                                          label={`Ticket #${ticket.nr}`}
+                                          defaultValue={ticket.thema}
                                           className="swal-thema-tf"
                                           onChange={handleTFThema}
                                    />
@@ -102,17 +123,17 @@ export default function Alert(props) {
                                    label="Beschreibung"
                                    multiline
                                    disabled={isEditing}
-                                   onChange={handleBeschreibung}
                                    rows={4}
                                    variant="filled"
-                                   defaultValue="Lorlisis arcu et dictum finibus. Nam urna tortor, feugiat non mauris quis, acc sapien, sit amet suscipit urna."
+                                   value={ticket.beschreibung}
+                                   onChange={handleChangeBeschreibung}
                                    className="swal-beschreibung-tf"
                             />
                             <div className="status-wrapper">
                                    <TextField className="swal-status-select"
                                           label="Status"
                                           id="demo-simple-select-helper"
-                                          value={statusSwitch(props.row.status)}
+                                          value={statusSwitch(ticket.status)}
                                           disabled
                                    />
                                    <ButtonGroup
@@ -128,13 +149,13 @@ export default function Alert(props) {
                             </div>
 
                             <FormControl className="verwantwortlich-select">
-                                   <InputLabel className="label" id="demo-multiple-name-label">Beteiligte:</InputLabel>
+                                   <InputLabel className="label" id="demo-multiple-name-label">Verwantwortlich:</InputLabel>
                                    <Select
                                           labelId="demo-multiple-name-label"
                                           id="demo-multiple-name"
                                           multiple
                                           disabled={isEditing}
-                                          value={personName}
+                                          value={ticket.verantwortlich}
                                           onChange={handleChangeVerantwortlich}
                                           input={<OutlinedInput label="Verantwortlich:" />}
                                    >
@@ -148,17 +169,7 @@ export default function Alert(props) {
                                           ))}
                                    </Select>
                             </FormControl>
-                            <FormGroup className="send-email-switch-wrapper">
-                                   <FormControlLabel 
-                                          control={
-                                                 <Switch  
-                                                        disabled={personName.length < 1}
-                                                        className="send-email-switch"
-                                                 />
-                                          } 
-                                          className="send-email-switch-label" 
-                                          label="Versende Email an jeden Beteiligten" />
-                            </FormGroup>
+
 
                             <div className="swal-account-wrapper">
                                    <TextField

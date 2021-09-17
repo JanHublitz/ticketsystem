@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { Divider } from "@material-ui/core";
 import "../css/Sidebar.scss"
 import DehazeIcon from "@material-ui/icons/Dehaze";
-import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import DoubleArrowRoundedIcon from "@material-ui/icons/DoubleArrowRounded";
 import HelpIcon from "@material-ui/icons/Help";
+import reactPng from "../assets/react.png";
+import muiPng from "../assets/mui.png";
+import springbootPng from "../assets/springboot.png";
+import mysqlSvg from "../assets/mysql.svg"
 
 export default function Sidebar(props) {
 
@@ -50,13 +55,21 @@ export default function Sidebar(props) {
 
        return (
               <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
-                     <DoubleArrowIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
+                     <DoubleArrowRoundedIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
                      {Object.keys(items).map(item =>
                             <div key={item} className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
                                    {iconSwitch(item)}
                                    <p className="text">{item}</p>
                             </div>
                      )}
+                     {/* <Divider /> */}
+                     {isIn ? null :
+                            <div className="Sidebar-footer">
+                                   <img id="react" className="powered-logo" src={reactPng} alt="" />
+                                   <img id="mui" className="powered-logo" src={muiPng} alt="" />
+                                   <img id="springboot" className="powered-logo" src={springbootPng} alt="" />
+                                   <img id="mysql" className="powered-logo" src={mysqlSvg} alt="" />
+                            </div>}
               </div >
        );
 }

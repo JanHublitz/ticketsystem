@@ -4,6 +4,7 @@ import Topbar from './Topbar';
 import Wiki from './Wiki';
 import { useEffect, useState } from 'react';
 import Ticketsystem from './Ticketsystem';
+import { SnackbarProvider } from 'notistack';
 
 export default function App() {
 
@@ -12,27 +13,29 @@ export default function App() {
 
        useEffect(() => {
               console.log(view)
-              switch(view) {
+              switch (view) {
                      case "Tickets":
                             setMainView(<Ticketsystem />);
                             break;
                      case "Wiki":
                             setMainView(<Wiki />);
                             break;
-                      default:
+                     default:
                             setMainView(<Ticketsystem />)
                             break;
               }
        }, [view])
 
        return (
-              <div className="App">
-                     <Sidebar setView={setView}/>
-                     <div className="main-wrapper">
-                            <Topbar />
-                            {MainView}
+              <SnackbarProvider>
+                     <div className="App">
+                            <Sidebar setView={setView} />
+                            <div className="main-wrapper">
+                                   <Topbar />
+                                   {MainView}
+                            </div>
                      </div>
-              </div>
+              </SnackbarProvider>
        );
 }
 

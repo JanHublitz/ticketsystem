@@ -1,24 +1,29 @@
 package com.imara.ticketsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "tickets")
 public class Ticket {
-    private final int id;
 
-    private final String thema;
+    @Id
+    @GeneratedValue
+    private int id;
 
+    @NotBlank
+    private String thema;
 
-    public Ticket(@JsonProperty("id") int id,
-                  @JsonProperty("thema") String thema) {
-        this.id = id;
-        this.thema = thema;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public String getThema() {
-        return this.thema;
-    }
 }
