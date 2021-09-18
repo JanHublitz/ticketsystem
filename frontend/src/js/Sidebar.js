@@ -1,13 +1,8 @@
 import { Fragment, useState } from "react";
-import { Divider } from "@material-ui/core";
 import "../css/Sidebar.scss"
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import DoubleArrowRoundedIcon from "@material-ui/icons/ArrowForwardIos";
 import HelpIcon from "@material-ui/icons/Help";
-import reactPng from "../assets/react.png";
-import muiPng from "../assets/mui.png";
-import springbootPng from "../assets/springboot.png";
-import mysqlSvg from "../assets/mysql.svg"
 import us from "../assets/us.png"
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
@@ -58,7 +53,7 @@ export default function Sidebar(props) {
 
        return (
               <Fragment>
-                     {!isIn ? <img src={us} alt="" /> : null}
+                     {!isIn ? <img src={us} alt="" className="us-img" /> : null}
                      <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
                             <DoubleArrowRoundedIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
                             <div className="user-wrapper">

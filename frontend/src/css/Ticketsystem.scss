@@ -5,8 +5,6 @@
        overflow-y: auto;
        padding-right: 2rem;
        padding-left: 2rem;
-
-
 }
 
 .dialog-settings {
@@ -34,13 +32,23 @@
        color: white !important;
 }
 
-thead {
+thead.MuiTableHead-root {
        background-color: var(--blue);
 
        .MuiSvgIcon-root {
               color: white;
        }
 }
+
+.MuiToolbar-root.MuiToolbar-regular {
+       position: sticky;
+       top: 0;
+       background-color: white;
+       opacity: 1;
+       z-index: 2;
+       border-bottom: 2px solid var(--blue);
+}
+
 
 .MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignLeft {
        color: white !important;
@@ -55,6 +63,18 @@ thead {
 .MuiButtonBase-root.MuiTableSortLabel-root {
        font-weight: bolder;
        color: white !important;
+}
+
+.MuiTableCell-root.MuiTableCell-body {
+       max-width: 300px;
+
+}
+
+.file-wrapper {
+       display: flex;
+       align-items: center;
+       font-family: "Roboto";
+       margin-top: 1.5rem;
 }
 
 .deleteIcon {

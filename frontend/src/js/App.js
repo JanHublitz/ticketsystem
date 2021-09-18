@@ -1,6 +1,6 @@
 import '../css/App.css';
 import Sidebar from './Sidebar';
-import Topbar from './Topbar';
+//import Topbar from './Topbar';
 import Wiki from './Wiki';
 import { useEffect, useState } from 'react';
 import Ticketsystem from './Ticketsystem';

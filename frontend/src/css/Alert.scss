@@ -8,6 +8,83 @@
        margin: 1rem;
        margin: 2rem;
 
+       .file-upload {
+              height: 10rem;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: flex-start;
+              align-items: center;
+              font-family: "Roboto";
+              color: grey;
+              font-size: 12px;
+              overflow-wrap: anywhere;
+              margin-top: 1rem;
+              background-color: grey;
+
+              .file-upload-proto {
+                     height: 100%;
+                     margin-top: 0.5rem;
+                     max-width: 7.5rem;
+                     padding-left: 0.5rem;
+                     padding-right: 0.5rem;
+                     border-radius: 0.5rem;
+                     justify-content: center;
+                     display: flex;
+                     flex-direction: column;
+                     margin-left: 2rem;
+                     align-items: center;
+
+
+                     .file-images {
+                            height: auto;
+                            width: auto;
+                            max-height: 70px;
+                            max-width: 60px;
+                            margin-bottom: 1rem;
+                            color: black;
+                     }
+
+                     span {
+                            color: black;
+                     }
+              }
+
+              .file-upload-btn {
+                     margin-left: 1rem;
+                     border: 3px dotted var(--blue);
+
+                     .file-upload-dropzone {
+                            font-size: 12px;
+                            display: flex;
+                            flex-direction: column;
+                            vertical-align: middle;
+                            align-items: center;
+                            color: rgb(93, 93, 93);
+                            border: none;
+
+                            .file-upload-icon {
+                                   color: var(--blue);
+                            }
+
+                            span {
+                                   color: var(--blue);
+                                   font-weight: bold;
+                                   margin-bottom: 0.5rem;
+                            }
+                     }
+              }
+
+              .file-upload-files {
+                     height: calc(100% - 4px);
+                     border: 2px solid var(--blue);
+              }
+       }
+
+
+       .swal-kategorie-select {
+              margin-top: 1rem;
+              width: 30%;
+       }
 
        .swal-prio-thema-wrapper {
               display: flex;
@@ -110,16 +187,15 @@
 
               .swal-bearbeiten-btn {
                      margin-top: 3rem;
+                     margin-right: 1.5rem;
                      border: 1px solid var(--blue);
                      color: var(--blue);
               }
 
               .swal-schliessen-btn {
                      margin-top: 3rem;
-                     margin-left: 1.5rem;
                      background-color: var(--blue);
                      color: white;
-
               }
        }
 }
