@@ -1,4 +1,4 @@
-import "../css/Alert.scss"
+import "../../css/Ticketsystem/Alerts.scss"
 import {
        MenuItem, TextField, FormControl, InputLabel, Select,
        InputAdornment, Button, ButtonGroup, OutlinedInput,
@@ -79,7 +79,25 @@ export default function Alert(props) {
        const names = [
               "Jan Hublitz",
               "Ralf Hublitz",
-              "Andrea Reichenauer"
+              "Andrea Reichenauer",
+              "Max Mustermann 1",
+              "Max Mustermann 2",
+              "Max Mustermann 3",
+              "Max Mustermann 4",
+              "Max Mustermann 5",
+              "Max Mustermann 6",
+              "Max Mustermann 7",
+              "Max Mustermann 8",
+              "Max Mustermann 9",
+              "Max Mustermann 10",
+              "Max Mustermann 11",
+              "Max Mustermann 12",
+              "Max Mustermann 13",
+              "Max Mustermann 14",
+              "Max Mustermann 15",
+              "Max Mustermann 16",
+              "Max Mustermann 17",
+              "Max Mustermann 17",
        ];
 
 
@@ -219,7 +237,7 @@ export default function Alert(props) {
 
                                    <Button className="swal-bearbeiten-btn" variant="outlined" endIcon={isEditing ? <CreateIcon /> : <SaveIcon />} onClick={toggleEditing}>
                                           {isEditing ? "Bearbeiten" : "Speichern"}
-                                   </Button> :
+                                   </Button>
                                    <Button className="swal-schliessen-btn" variant="contained" endIcon={<CloseIcon />} onClick={handleExit}>
                                           Schließen
                                    </Button>

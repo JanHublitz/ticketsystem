@@ -1,8 +1,8 @@
 import { FormControl, InputLabel, Select, OutlinedInput, MenuItem } from "@material-ui/core";
 import { useState } from "react";
-import "../css/SidebarRight.scss"
+import "../../css/Ticketsystem/Filterbar.scss"
 
-export default function SidebarRight() {
+export default function Filterbar() {
 
        const prios = [
               "Kein Filter",

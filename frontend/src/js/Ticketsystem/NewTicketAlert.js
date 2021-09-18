@@ -1,12 +1,9 @@
-import "../css/Alert.scss"
+import "../../css/Ticketsystem/Alerts.scss"
 import {
-       MenuItem, TextField, FormControl, InputLabel, Select,
-       Button, OutlinedInput,
-       Dialog,
-       Switch,
-       FormGroup,
-       FormControlLabel,
+       TextField, Select, OutlinedInput, InputLabel, MenuItem, FormControl,
+       Button, Dialog, Switch, FormGroup, FormControlLabel
 } from '@material-ui/core'
+import ToggleButton from "@mui/material/ToggleButton"
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh"
 import SaveIcon from "@material-ui/icons/Save"
 import CloseIcon from "@material-ui/icons/Close"
@@ -14,9 +11,10 @@ import { useState } from "react";
 import { useSnackbar } from 'notistack';
 import UploadFileIcon from "@material-ui/icons/CloudUpload"
 import ImageIcon from '@material-ui/icons/Image';
-import pdfImage from "../assets/pdf.png";
-import wordImage from "../assets/word.png";
-import excelImage from "../assets/excel.png";
+import pdfImage from "../../assets/pdf.png";
+import wordImage from "../../assets/word.png";
+import excelImage from "../../assets/excel.png";
+import AttachFileIcon from "@material-ui/icons/AttachFile"
 
 
 export default function NewTicketAlert(props) {
@@ -163,7 +161,9 @@ export default function NewTicketAlert(props) {
               document.getElementById("input-file").click();
        }
        const handleFileDropped = (e) => {
-              setFiles({ ...files, [Object.keys(files).length + 1]: e.target.value.split("\\")[2] });
+              if (e.target.value) {
+                     setFiles({ ...files, [Object.keys(files).length + 1]: e.target.value.split("\\")[2] });
+              }
        }
 
        const getCorrespondingImage = (extension) => {
@@ -280,12 +280,23 @@ export default function NewTicketAlert(props) {
                                           </FormGroup>
                                           : null
                             }
-                            <div className="file-wrapper">
+
+                            {/* <div className="file-wrapper">
                                    <Switch onChange={handleFileSwitchChange}></Switch>
                                    <div className="">
-                                          Dateien anfügen
+                                          <span style={{ textTransform: "uppercase" }}>Dateien anfügen</span>
                                    </div>
-                            </div>
+                            </div> */}
+                            <ToggleButton
+                                   value="check"
+                                   variant="outlined"
+                                   selected={showFileUpload}
+                                   onChange={handleFileSwitchChange}
+                                   className="file-togglebtn"
+                            >
+                                   Dateien einfügen
+                                   <AttachFileIcon />
+                            </ToggleButton>
                             {showFileUpload ?
                                    <div className="file-upload">
                                           <Button className="file-upload-btn file-upload-proto" type="file" onClick={handleFileUpload}>

@@ -1,11 +1,10 @@
-import '../css/App.css';
-import Sidebar from './Sidebar';
-//import Topbar from './Topbar';
-import Wiki from './Wiki';
+import '../css/App.scss';
+import Sidebar from './SidebarLeft';
+import Wiki from './Unterseite 2/Wiki';
 import { useEffect, useState } from 'react';
-import Ticketsystem from './Ticketsystem';
+import Ticketsystem from './Ticketsystem/Ticketsystem';
 import { SnackbarProvider } from 'notistack';
-import SidebarRight from './SidebarRight';
+import Filterbar from './Ticketsystem/Filterbar';
 
 
 export default function App() {
@@ -38,7 +37,7 @@ export default function App() {
                             <div className="main-wrapper">
                                    <div className="main-sidebar-wrapper">
                                           {MainView}
-                                          {isMainView ? <SidebarRight /> : null}
+                                          {isMainView ? <Filterbar /> : null}
                                    </div>
                             </div>
                      </div>

@@ -1,12 +1,12 @@
 import { Fragment, useState } from "react";
-import "../css/Sidebar.scss"
+import "../css/SidebarLeft.scss"
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import DoubleArrowRoundedIcon from "@material-ui/icons/ArrowForwardIos";
 import HelpIcon from "@material-ui/icons/Help";
 import us from "../assets/us.png"
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
-export default function Sidebar(props) {
+export default function SidebarLeft(props) {
 
        const setView = props.setView;
        const [isIn, setIsIn] = useState(false)

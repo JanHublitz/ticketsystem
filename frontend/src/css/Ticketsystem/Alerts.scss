@@ -8,8 +8,22 @@
        margin: 1rem;
        margin: 2rem;
 
+       .file-togglebtn {
+              background-color: white !important;
+              border: 1px solid var(--blue) !important;
+              color: var(--blue) !important;
+              margin-top: 2rem;
+              margin-bottom: 1rem;
+              transition: all 350ms ease-in-out;
+              font-size: 12px;
+
+              &:hover {
+                     background-color: rgb(240, 240, 240) !important;
+              }
+       }
+
        .file-upload {
-              height: 10rem;
+              height: auto;
               display: flex;
               flex-wrap: wrap;
               justify-content: flex-start;
@@ -18,12 +32,13 @@
               color: grey;
               font-size: 12px;
               overflow-wrap: anywhere;
-              margin-top: 1rem;
-              background-color: grey;
+              background-color: rgba(0, 0, 0, 0.09);
+              border-radius: 0.3rem;
+              animation: fadeIn 0.5s;
 
               .file-upload-proto {
-                     height: 100%;
-                     margin-top: 0.5rem;
+                     width: 7rem;
+                     height: 10rem;
                      max-width: 7.5rem;
                      padding-left: 0.5rem;
                      padding-right: 0.5rem;
@@ -33,7 +48,7 @@
                      flex-direction: column;
                      margin-left: 2rem;
                      align-items: center;
-
+                     margin-bottom: 1rem;
 
                      .file-images {
                             height: auto;
@@ -50,7 +65,11 @@
               }
 
               .file-upload-btn {
-                     margin-left: 1rem;
+                     margin-left: 2rem;
+                     margin-top: 1rem;
+                     margin-bottom: 1rem;
+                     max-width: 100rem;
+                     width: 8rem;
                      border: 3px dotted var(--blue);
 
                      .file-upload-dropzone {
@@ -75,8 +94,25 @@
               }
 
               .file-upload-files {
-                     height: calc(100% - 4px);
-                     border: 2px solid var(--blue);
+                     height: calc(10rem - 4px);
+                     // border: 2px solid var(--blue);
+                     margin-top: 1rem;
+                     animation: fadeIn 1s;
+                     background-color: white;
+                     box-shadow: 0px 2px 1px -1px rgb(136, 136, 136),
+                            0px 1px 1px 0px rgb(163, 163, 163),
+                            0px 1px 3px 0px rgb(163, 163, 163);
+                     transition: all 350ms ease-in-out;
+                     cursor: pointer;
+
+                     &:hover {
+                            // background-color: rgb(240, 240, 240);
+                            background-color: var(--blue);
+
+                            span {
+                                   color: white !important;
+                            }
+                     }
               }
        }
 
@@ -190,6 +226,9 @@
                      margin-right: 1.5rem;
                      border: 1px solid var(--blue);
                      color: var(--blue);
+                     box-shadow: 0px 3px 1px -2px rgb(196, 196, 196),
+                            0px 2px 2px 0px rgb(196, 196, 196),
+                            0px 1px 5px 0px rgb(196, 196, 196);
               }
 
               .swal-schliessen-btn {
@@ -197,5 +236,15 @@
                      background-color: var(--blue);
                      color: white;
               }
+       }
+}
+
+@keyframes fadeIn {
+       0% {
+              opacity: 0;
+       }
+
+       100% {
+              opacity: 1;
        }
 }
