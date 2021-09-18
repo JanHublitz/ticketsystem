@@ -164,12 +164,12 @@ export default function Main() {
 
        useEffect(() => {
               const _fetch = async () => {
-                     const data = await fetch(`http://${process.env.REACT_APP_IP_BACKEND}/api/tickets`, { method: "GET" })
-                     const json = await data.json()
-                     setRows(json)
-                     setToShowRow(json[0])
+                     const data = await fetch(`http://${process.env.REACT_APP_IP_BACKEND}/api/tickets`, { method: "GET" });
+                     const json = await data.json();
+                     setRows(json);
+                     setToShowRow(json[0]);
               }
-              _fetch()
+              _fetch();
        }, [sync]);
 
        const handleClickAddTicket = () => {
@@ -235,7 +235,7 @@ export default function Main() {
                             className += "high";
                             break;
                      default:
-                            className += "low"
+                            className += "low";
                             break;
               }
               return <PriorityHighIcon className={className}></PriorityHighIcon>
@@ -244,13 +244,13 @@ export default function Main() {
        const statusSwitch = (s) => {
               switch (s) {
                      case 1:
-                            return "Neu"
+                            return "Neu";
                      case 2:
-                            return "In Bearbeitung von:"
+                            return "In Bearbeitung von:";
                      case 3:
-                            return "Fertig gestellt von:"
+                            return "Fertig gestellt von:";
                      default:
-                            return "Neu"
+                            return "Neu";
               }
        }
 
@@ -281,7 +281,7 @@ export default function Main() {
        return (
               <div className="Main">
                      <Dialog open={openSettingsDialog} className="dialog-settings">
-                            <FormControl sx={{ m: 1, minWidth: 120 }} className="form-settings">
+                            <FormControl className="form-settings">
                                    <InputLabel id="demo-simple-select-helper-label">Theme-Farbe auswählen</InputLabel>
                                    <Select
                                           labelId="demo-simple-select-helper-label"
