@@ -164,7 +164,7 @@ export default function Main() {
 
        useEffect(() => {
               const _fetch = async () => {
-                     const data = await fetch("http://192.168.176.135:3001/api/tickets", { method: "GET" })
+                     const data = await fetch(`http://${process.env.REACT_APP_IP_BACKEND}/api/tickets`, { method: "GET" })
                      const json = await data.json()
                      setRows(json)
                      setToShowRow(json[0])

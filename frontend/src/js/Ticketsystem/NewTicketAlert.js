@@ -117,7 +117,8 @@ export default function NewTicketAlert(props) {
                      "bearbeitet_von": "Jan Hublitz hardcoded"
               }
 
-              fetch("http://192.168.176.135:3001/api/ticket/add", {
+              console.log(`http://${process.env.IP_BACKEND}/api/ticket/add`)
+              fetch(`http://${process.env.IP_BACKEND}/api/ticket/add`, {
                      method: "POST",
                      headers: {
                             'Accept': 'application/json',

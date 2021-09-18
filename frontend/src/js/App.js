@@ -5,10 +5,9 @@ import { useEffect, useState } from 'react';
 import Ticketsystem from './Ticketsystem/Ticketsystem';
 import { SnackbarProvider } from 'notistack';
 import Filterbar from './Ticketsystem/Filterbar';
-
+require('dotenv').config()
 
 export default function App() {
-
        const [view, setView] = useState("Tickets");
        const [MainView, setMainView] = useState(<Ticketsystem />)
        const [isMainView, setIsMainView] = useState(true);
