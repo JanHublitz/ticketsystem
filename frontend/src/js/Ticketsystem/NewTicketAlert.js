@@ -155,6 +155,7 @@ export default function NewTicketAlert(props) {
 
        const handleFileSwitchChange = () => {
               setShowFileUpload(!showFileUpload);
+              setFiles({})
        }
 
        const handleFileUpload = () => {
@@ -281,12 +282,6 @@ export default function NewTicketAlert(props) {
                                           : null
                             }
 
-                            {/* <div className="file-wrapper">
-                                   <Switch onChange={handleFileSwitchChange}></Switch>
-                                   <div className="">
-                                          <span style={{ textTransform: "uppercase" }}>Dateien anfügen</span>
-                                   </div>
-                            </div> */}
                             <ToggleButton
                                    value="check"
                                    variant="outlined"
