@@ -58,7 +58,15 @@ export default function SidebarLeft(props) {
                             <DoubleArrowRoundedIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
                             <div className="user-wrapper">
                                    <AccountCircle className="account-icon" />
-                                   {!isIn ? <span >Jan Hublitz</span> : null}
+                                   {
+                                   !isIn ? <span >Jan Hublitz</span> 
+                                   : 
+                                   <Fragment>
+                                          {"Jan Hublitz".split(" ").map(name =>
+                                                 <span>{name}</span>
+                                          )}
+                                   </Fragment>
+                                   } 
                             </div>
                             {Object.keys(items).map(item =>
                                    <div key={item} className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
