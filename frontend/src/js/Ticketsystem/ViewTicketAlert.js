@@ -22,10 +22,45 @@ export default function Alert(props) {
               setTicket({ ...props.ticket, verantwortlich: [] })
        }, [props]);
 
+       const kategorieSwitch = (k) => {
+              switch (k) {
+                     case 1:
+                            return "Technik";
+                     case 2:
+                            return "Vertrieb";
+                     case 3:
+                            return "Lager";
+                     case 4:
+                            return "GF";
+                     default:
+                            return "Technik"
+              }
+       }
+
 
        const toggleEditing = () => {
               if (!isEditing) {
-                     //SPEICHERN
+                     fetch(`http://${process.env.REACT_APP_IP_BACKEND}/api/ticket/update`,
+                            {
+                                   method: "PUT",
+                                   headers: {
+                                          'Accept': 'application/json',
+                                          'Content-Type': 'application/json'
+                                   },
+                                   body: JSON.stringify({
+                                          "id": ticket.id,
+                                          "thema": ticket.thema,
+                                          "prioritaet": ticket.prioritaet,
+                                          "beschreibung": ticket.beschreibung,
+                                          "kategorie": kategorieSwitch(ticket.kategorie),
+                                          "status": ticket.status,
+                                          "verantwortlich": ticket.verantwortlich.join(";"),
+                                          "erstellt": ticket.erstellt,
+                                          "erstellt_von": "Jan Hublitz hardcoded",
+                                          "bearbeitet": ticket.bearbeitet,
+                                          "bearbeitet_von": "Jan Hublitz hardcoded"
+                                   })
+                            }).then(props.setSync(!props.sync));
               }
 
               setEditing(!isEditing);

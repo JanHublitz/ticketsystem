@@ -1,5 +1,9 @@
+.MuiDialog-paperWidthSm {
+       max-width: 100% !important;
+}
+
 .Swal {
-       max-width: 100%;
+       width: 60rem;
        height: 100%;
        margin: 1rem;
        margin: 2rem;
@@ -27,7 +31,6 @@
               font-family: "Roboto";
               color: grey;
               font-size: 12px;
-              overflow-wrap: anywhere;
               background-color: rgba(0, 0, 0, 0.09);
               border-radius: 0.3rem;
               animation: fadeIn 0.5s;
@@ -45,13 +48,16 @@
                      margin-left: 2rem;
                      align-items: center;
                      margin-bottom: 1rem;
+                     overflow-x: hidden;
+
 
                      .file-images {
                             height: auto;
                             width: auto;
                             max-height: 70px;
                             max-width: 60px;
-                            margin-bottom: 1rem;
+                            margin-top: 1rem;
+                            margin-bottom: 0.5rem;
                             color: black;
                      }
 
@@ -91,8 +97,8 @@
 
               .file-upload-files {
                      height: calc(10rem - 4px);
-                     // border: 2px solid var(--blue);
                      margin-top: 1rem;
+                     margin-right: 1rem;
                      animation: fadeIn 1s;
                      background-color: white;
                      box-shadow: 0px 2px 1px -1px rgb(136, 136, 136),
@@ -108,6 +114,17 @@
                             span {
                                    color: white !important;
                             }
+
+                            .close-icon {
+                                   display: block;
+                            }
+                     }
+
+                     .close-icon {
+                            display: none;
+                            margin-left: 75%;
+                            margin-bottom: -3rem;
+                            transform: translateY(-1.5rem);
                      }
               }
        }

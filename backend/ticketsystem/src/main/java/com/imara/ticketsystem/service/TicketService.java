@@ -3,7 +3,6 @@ package com.imara.ticketsystem.service;
 import com.imara.ticketsystem.repo.TicketRepo;
 import com.imara.ticketsystem.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +36,11 @@ public class TicketService {
     }
 
     public Ticket updateTicket(Ticket ticket) {
+        /*
         Ticket existingTicket = ticketRepo.findById(ticket.getId()).orElse(null);
         existingTicket.setThema(ticket.getThema());
-        return ticketRepo.save(existingTicket);
+        */
+
+        return ticketRepo.save(ticket);
     }
 }

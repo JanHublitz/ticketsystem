@@ -1,7 +1,7 @@
 import "../../css/Ticketsystem/Alerts.scss"
 import {
        TextField, Select, OutlinedInput, InputLabel, MenuItem, FormControl,
-       Button, Dialog, Switch, FormGroup, FormControlLabel
+       Button, Dialog, Switch, FormGroup, FormControlLabel, IconButton
 } from '@material-ui/core'
 import ToggleButton from "@mui/material/ToggleButton"
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh"
@@ -15,7 +15,6 @@ import pdfImage from "../../assets/pdf.png";
 import wordImage from "../../assets/word.png";
 import excelImage from "../../assets/excel.png";
 import AttachFileIcon from "@material-ui/icons/AttachFile"
-
 
 export default function NewTicketAlert(props) {
 
@@ -186,6 +185,17 @@ export default function NewTicketAlert(props) {
               return <img src={src} alt="" className={className} />;
        }
 
+       const handleDeleteFile = (_index) => {
+              var _files = {};
+              var keys = Object.keys(files);
+              for (var i = 0; i < keys.length; i++) {
+                     if (keys[i] !== _index) {
+                            _files[i] = files[keys[i]]
+                     }
+              }
+              setFiles(_files)
+       }
+
        const names = [
               "Jan Hublitz",
               "Ralf Hublitz",
@@ -307,8 +317,11 @@ export default function NewTicketAlert(props) {
                                                         <span>Datei hinzufügen</span>
                                                  </div>
                                           </Button>
-                                          {Object.keys(files).map(file =>
+                                          {Object.keys(files).map((file, index) =>
                                                  <div className="file-upload-files file-upload-proto">
+                                                        <IconButton className="close-icon" onClick={() => handleDeleteFile(index)}>
+                                                               <CloseIcon className="close-icon-x" />
+                                                        </IconButton>
                                                         {getCorrespondingImage(files[file].split(".")[1])}
                                                         <span>{files[file].split(".")[0]}</span>
                                                  </div>

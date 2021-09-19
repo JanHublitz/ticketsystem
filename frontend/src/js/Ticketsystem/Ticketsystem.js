@@ -161,6 +161,7 @@ export default function Main() {
        const [creationMode, setCreationMode] = useState(false);
        const [openSettingsDialog, setOpenSettingsDialog] = useState(false);
        const [sync, setSync] = useState(true);
+       const [themeColor, setThemeColor] = useState("")
 
        useEffect(() => {
               const _fetch = async () => {
@@ -278,6 +279,19 @@ export default function Main() {
               setOpenSettingsDialog(true);
        }
 
+       const handleThemeColorChange = (e) => {
+              setThemeColor(e.target.value)
+              document.documentElement.style.setProperty("--blue", e.target.value)
+       }
+
+       const handleDeleteTicket = () => {
+              console.log(selected)
+              for (var i = 0; i < selected.length; i++) {
+                     fetch(`http://${process.env.REACT_APP_IP_BACKEND}/api/ticket/delete/${selected[i]}`, { method: "DELETE" });
+              }
+              setSync(!sync);
+       }
+
        return (
               <div className="Main">
                      <Dialog open={openSettingsDialog} className="dialog-settings">
@@ -288,16 +302,19 @@ export default function Main() {
                                           id="demo-simple-select-helper"
                                           value=""
                                           label="Age"
-                                          onChange=""
+                                          onChange={handleThemeColorChange}
+                                          style={{ backgroundColor: themeColor }}
                                    >
-                                          <MenuItem style={{ backgroundColor: "rgb(100,23,1)" }} value=""></MenuItem>
-                                          <MenuItem style={{ backgroundColor: "rgb(100,23,255)" }} value={10}></MenuItem>
-                                          <MenuItem style={{ backgroundColor: "rgb(255,23,1)" }} value={20}></MenuItem>
-                                          <MenuItem style={{ backgroundColor: "rgb(0,23,100)" }} value={30}></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "var(--blue2)" }} value="var(--blue2)"></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "var(--darkblue)" }} value="var(--darkblue)"></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "var(--green)" }} value="var(--green)"></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "var(--orange)" }} value="var(--orange)"></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "var(--red)" }} value="var(--red)"></MenuItem>
+                                          <MenuItem style={{ backgroundColor: "var(--purple)" }} value="var(--purple)"></MenuItem>
                                    </Select>
                             </FormControl>
                      </Dialog>
-                     {toShowRow ? <ViewTicketAlert setCreationMode={setCreationMode} creationMode={creationMode} ticket={toShowRow} showDialog={showDialog} setShowDialog={setShowDialog} /> : null}
+                     {toShowRow ? <ViewTicketAlert setSync={setSync} sync={sync} setCreationMode={setCreationMode} creationMode={creationMode} ticket={toShowRow} showDialog={showDialog} setShowDialog={setShowDialog} /> : null}
                      <NewTicketAlert sync={sync} setSync={setSync} setShowNewTicketDialog={setShowNewTicketDialog} showNewTicketDialog={showNewTicketDialog} />
                      <Paper className={classes.paper}>
                             <Toolbar
@@ -326,7 +343,7 @@ export default function Main() {
                                    } {selected.length < 1 ?
 
                                           <Tooltip title="Einstellungen">
-                                                 <IconButton aria-label="delete" onClick={handleSettings}>
+                                                 <IconButton aria-label="" onClick={handleSettings}>
                                                         <SettingsIcon className="SyncIcon" />
                                                  </IconButton>
                                           </Tooltip> : null
@@ -334,7 +351,7 @@ export default function Main() {
 
                                    {selected.length < 1 ?
                                           <Tooltip title="Aktualisieren">
-                                                 <IconButton aria-label="delete" onClick={() => setSync(!sync)}>
+                                                 <IconButton aria-label="" onClick={() => setSync(!sync)}>
                                                         <SyncIcon className="SyncIcon" />
                                                  </IconButton>
                                           </Tooltip> : null
@@ -343,7 +360,7 @@ export default function Main() {
                                           selected.length > 0 ? (
                                                  <div className="selected-icons">
                                                         <Tooltip title="Löschen">
-                                                               <IconButton aria-label="delete">
+                                                               <IconButton aria-label="delete" onClick={handleDeleteTicket}>
                                                                       <DeleteIcon className="deleteIcon" />
                                                                </IconButton>
                                                         </Tooltip>
