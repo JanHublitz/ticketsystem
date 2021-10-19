@@ -10,124 +10,135 @@ import sha256 from "js-sha256";
 
 export default function SidebarLeft(props) {
 
-       const setView = props.setView;
-       const [isIn, setIsIn] = useState(false)
-       const [items, setItems] = useState(
-              {
-                     "Tickets": true,
-                     "Wiki": false,
-              }
-       );
+    const setView = props.setView;
+    const [isIn, setIsIn] = useState(false)
+    const [items, setItems] = useState(
+        {
+            "Tickets": true,
+            //"Adminpanel": false,
+        }
+    );
 
-       const [users, setUsers] = useState([])
-       const [activeUser, setActiveUser] = useState(null);
-       const [signInUser, setSignInUser] = useState(null);
-       const [openAuthDialog, setOpenAuthDialog] = useState(false);
-       const [isAuth, setIsAuth] = useState(false);
+    const [users, setUsers] = useState([])
+    const [activeUser, setActiveUser] = useState(null);
+    const [signInUser, setSignInUser] = useState(null);
+    const [openAuthDialog, setOpenAuthDialog] = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
 
-       useEffect(() => {
-              const _fetch = async () => {
-                     const data = await fetch(`http://${process.env.REACT_APP_IP_BACKEND}/api/users`, { method: "GET" });
-                     const json = await data.json();
-                     setUsers(json);
-              }
-              _fetch();
-       }, [])
+    useEffect(() => {
+        const _fetch = async () => {
+            try {
+                const data = await fetch(`http://${process.env.REACT_APP_IP_BACKEND}/api/users`, { method: "GET" });
+                const json = await data.json();
+                setUsers(json);
+            } catch {
 
-       const toggleIsIn = () => {
-              setIsIn(!isIn);
-       }
+            }
+        }
+        _fetch();
+    }, [])
 
-       const handleClickItem = (clickedItem) => {
-              let activeElement;
+    const toggleIsIn = () => {
+        setIsIn(!isIn);
+    }
 
-              for (const key in items) {
-                     if (items[key]) {
-                            activeElement = key;
-                            break;
-                     }
-              }
+    const handleClickItem = (clickedItem) => {
+        let activeElement;
 
-              if (clickedItem === activeElement) {
-                     return;
-              }
+        for (const key in items) {
+            if (items[key]) {
+                activeElement = key;
+                break;
+            }
+        }
 
-              setItems({ ...items, [activeElement]: false, [clickedItem]: true })
-              setView(clickedItem)
-       }
+        if (clickedItem === activeElement) {
+            return;
+        }
 
-       const iconSwitch = (name) => {
-              switch (name) {
-                     case "Tickets":
-                            return <DehazeIcon className="icon" />
-                     case "Wiki":
-                            return <HelpIcon className="icon" />
-                     default:
-                            return;
-              }
-       }
+        setItems({ ...items, [activeElement]: false, [clickedItem]: true })
+        setView(clickedItem)
+    }
 
-       const handleUserChange = (e) => {
-              setOpenAuthDialog(true);
-              setSignInUser(e.target.value)
-       }
+    const iconSwitch = (name) => {
+        switch (name) {
+            case "Tickets":
+                return <DehazeIcon className="icon" />
+            case "Adminpanel":
+                return <HelpIcon className="icon" />
+            default:
+                return;
+        }
+    }
 
-       const handleExit = () => {
+    const handleUserChange = (e) => {
+        setOpenAuthDialog(true);
+        setSignInUser(e.target.value)
+    }
 
-       }
+    const handleExit = () => {
 
-       const handlePwTfChange = (eTf) => {
-              var auth = sha256(eTf.target.value).toUpperCase() === users[signInUser].hash
+    }
 
-              if (auth) {
-                     setOpenAuthDialog(false);
-                     setActiveUser(signInUser);
-              }
-              setIsAuth(auth)
-       }
+    const handlePwTfChange = (eTf) => {
+        var auth = sha256(eTf.target.value).toUpperCase() === users[signInUser].hash
 
-       return (
-              <>
-                     <Dialog
-                            open={openAuthDialog}
-                            onClose={handleExit}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                            className="">
-                            <TextField onChange={handlePwTfChange}>
+        if (auth) {
+            setOpenAuthDialog(false);
+            setActiveUser(signInUser);
+        }
+        setIsAuth(auth)
+    }
 
-                            </TextField>
-                     </Dialog>
-                     <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
-                            <DoubleArrowRoundedIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
-                            <div className="user-wrapper">
-                                   <p>{isAuth ? "AUTHENTICATED" : "NOT AUTHENTICATED"}</p>
-                                   <AccountCircle className="account-icon" />
-                                   {!isIn ?
-                                          <Select
-                                                 value={users[activeUser]}
-                                                 onChange={handleUserChange}
-                                          >
+    return (
+        <>
+            <Dialog
+                open={openAuthDialog}
+                onClose={handleExit}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                className="">
+                <TextField onChange={handlePwTfChange}>
 
-                                                 {users.map((user, index) =>
-                                                        <MenuItem value={index}>{user.name}</MenuItem>
-                                                 )}
-                                          </Select> :
-                                          users[activeUser].name.split(" ").map(name =>
-                                                 <span>{name}</span>
-                                          )
-                                   }
-                            </div>
-                            {Object.keys(items).map(item =>
-                                   <div key={item} className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
-                                          {iconSwitch(item)}
-                                          <b></b>
-                                          <b></b>
-                                          <p className="text">{item}</p>
-                                   </div>
+                </TextField>
+            </Dialog>
+            <div className={isIn ? "Sidebar isIn" : "Sidebar"}>
+                <DoubleArrowRoundedIcon className={isIn ? "toggleInIcon" : "toggleInIcon left"} onClick={toggleIsIn} />
+                <div className="user-wrapper">
+                    {/* <p>{isAuth ? "AUTHENTICATED" : "NOT AUTHENTICATED"}</p> */}
+                    <AccountCircle className="account-icon" />
+                    {!isIn ?
+                        // <Select
+                        //        value={users[activeUser]}
+                        //        onChange={handleUserChange}
+                        // >
 
-                            )}
-                     </div >
-              </>
-       );
+                        //        {users.map((user, index) =>
+                        //               <MenuItem value={index}>{user.name}</MenuItem>
+                        //        )}
+                        // </Select> :
+                        // users[activeUser].name.split(" ").map(name =>
+                        //        <span>{name}</span>
+                        // )
+
+                        <p> Jan Hublitz</p> :
+
+                        "Jan Hublitz".split(" ").map(name =>
+                            <span>{name}</span>
+                            // )
+                        )
+                    }
+                </div>
+                {Object.keys(items).map(item =>
+                    <div key={item} className={items[item] ? "item active" : "item"} onClick={() => handleClickItem(item)}>
+                        {iconSwitch(item)}
+                        <b></b>
+                        <b></b>
+                        <p className="text">{item}</p>
+                    </div>
+
+                )}
+            </div >
+        </>
+    );
 }

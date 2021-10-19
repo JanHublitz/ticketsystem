@@ -16,10 +16,10 @@
        display: flex;
        flex-direction: column;
        background-repeat: no-repeat;
-       background: linear-gradient(180deg, var(--blue) 75%, white 100%);
-       // background-color: lightblue;
+       // background: linear-gradient(180deg, var(--blue) 75%, white 100%);
+       background-color: var(--sidebar-backgroundColor);
        backdrop-filter: blur(10px);
-       border-top-right-radius: 1rem;
+       // border-top-right-radius: 1rem;
        font-family: "Roboto";
 
        .user-wrapper {
@@ -35,18 +35,20 @@
               padding-top: 0.3rem;
               padding-bottom: 0.3rem;
               padding-left: 0.3rem;
-              background-color: white;
+              background-color: var(--sidebar-activeColor);
               border-bottom-left-radius: 0.5rem;
               border-top-left-radius: 0.5rem;
               transition: all 0.5s cubic-bezier(0.02, 0.92, 0.65, 0.5);
               // box-shadow: 0px 15px 10px -15px #111;
 
-              span {
+              p {
                      margin-left: 2rem;
                      font-size: 12px;
+                     color: var(--sidebar-color);
               }
 
               .account-icon {
+                     color: var(--sidebar-color);
                      width: 45px;
                      height: 45px;
               }
@@ -54,11 +56,11 @@
 
        &.isIn {
               width: 6rem;
-              background-color: var(--blue);
+              background-color: var(--sidebar-backgroundColor);
 
               .user-wrapper {
-                     color: black;
-                     background-color: white;
+                     color: var(--sidebar-color);
+                     background-color: var(--sidebar-activeColor);
                      flex-direction: column;
 
                      .account-icon {
@@ -75,13 +77,13 @@
               }
 
               .toggleInIcon {
-                     color: white;
+                     color: var(--sidebar-color);
               }
 
               .item {
                      transition: all 0.5s cubic-bezier(0.02, 0.92, 0.65, 0.5);
                      flex-direction: column;
-                     color: white;
+                     color: var(--sidebar-color);
                      justify-content: center;
                      align-items: stretch;
                      padding-left: 0;
@@ -98,37 +100,37 @@
                      .icon {
                             margin-top: 0.5rem;
                             margin-left: calc(50% - 15px);
-                            color: white;
+                            color: var(--sidebar-sidebar-color);
                      }
 
                      &.active {
-                            background-color: white;
-                            color: black;
+                            background-color: var(--sidebar-activeColor);
+                            color: var(--sidebar-color);
                             margin-right: 0rem;
 
                             .icon {
-                                   color: black;
+                                   color: var(--sidebar-color);
                             }
 
                             &:hover {
-                                   background-color: white;
+                                   background-color: var(--sidebar-hoverbackgroundColor);
                                    color: var(--blue);
 
                             }
 
                             b:nth-child(2) {
-                                   background-color: white;
+                                   background-color: var(--sidebar-activeColor);
 
                                    &::before {
-                                          background-color: var(--blue);
+                                          background-color: var(--sidebar-backgroundColor);
                                    }
                             }
 
                             b:nth-child(3) {
-                                   background-color: white;
+                                   background-color: var(--sidebar-activeColor);
 
                                    &::before {
-                                          background-color: var(--blue);
+                                          background-color: var(--sidebar-backgroundColor);
                                    }
                             }
                      }
@@ -142,7 +144,7 @@
                                    color: white;
                             }
 
-                            background-color: var(--blue);
+                            background-color: var(--sidebar-backgroundColor);
                      }
 
               }
@@ -157,7 +159,7 @@
               margin-top: 1rem;
               margin-bottom: 2rem;
               transition: transform 500ms ease-in-out;
-              color: white;
+              color: var(--sidebar-color);
 
               &.left {
                      transform: rotate(-180deg);
@@ -165,7 +167,7 @@
        }
 
        .item {
-              color: white;
+              color: var(--sidebar-color);
               animation: fadeIn 1s;
               display: flex;
               font-family: "Roboto";
@@ -181,12 +183,11 @@
               word-wrap: normal;
               border-top-right-radius: 0;
               border-bottom-right-radius: 0;
-
               position: relative;
 
               &.active {
-                     background-color: white;
-                     color: black;
+                     background-color: var(--sidebar-activeColor);
+                     color: var(--sidebar-color);
                      margin-right: 0rem;
                      // box-shadow: 0px 15px 10px -15px #111;
 
@@ -194,7 +195,7 @@
                             width: 100%;
                             height: 1em;
                             position: absolute;
-                            background-color: white;
+                            background-color: var(--sidebar-activeColor);
                             top: -1em;
                             right: 0;
 
@@ -205,7 +206,7 @@
                                    left: 0;
                                    width: 100%;
                                    height: 100%;
-                                   background-color: var(--blue);
+                                   background-color: var(--sidebar-backgroundColor);
                                    border-bottom-right-radius: 1em;
                             }
                      }
@@ -214,7 +215,7 @@
                             width: 100%;
                             height: 1em;
                             position: absolute;
-                            background-color: white;
+                            background-color: var(--sidebar-activeColor);
                             bottom: -1em;
                             right: 0;
 
@@ -225,7 +226,7 @@
                                    left: 0;
                                    width: 100%;
                                    height: 100%;
-                                   background-color: var(--blue);
+                                   background-color: var(--sidebar-backgroundColor);
                                    border-top-right-radius: 1em;
                             }
                      }
@@ -235,15 +236,13 @@
 
               }
 
-              &:hover {
-                     // background-color: white;
-                     // color: black;
-                     // box-shadow: 0px 15px 10px -15px #111;
+              // &:hover {
+              //        background-color: var(--sidebar-activeColor);
 
-                     &.active {
-                            background-color: white;
-                     }
-              }
+              //        &.active {
+              //               background-color: var(--sidebar-hoverbackgroundColor);
+              //        }
+              // }
 
               .icon {
                      width: 30px;
@@ -257,33 +256,6 @@
               }
        }
 
-       .Sidebar-footer {
-              display: none;
-              justify-content: space-around;
-              height: 100%;
-
-              .powered-logo {
-                     &#react {
-                            width: 65px;
-                            height: 50px;
-                     }
-
-                     &#mui {
-                            width: 50px;
-                            height: 50px;
-                     }
-
-                     &#springboot {
-                            width: 60px;
-                            height: 60px;
-                     }
-
-                     &#mysql {
-                            width: 50px;
-                            height: 50px;
-                     }
-              }
-       }
 }
 
 @keyframes fadeIn {

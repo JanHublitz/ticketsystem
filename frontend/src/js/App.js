@@ -1,6 +1,6 @@
 import '../css/App.scss';
 import Sidebar from './SidebarLeft';
-import Wiki from './Unterseite 2/Wiki';
+import Adminpanel from './Adminpanel/Adminpanel';
 import { useEffect, useState } from 'react';
 import Ticketsystem from './Ticketsystem/Ticketsystem';
 import { SnackbarProvider } from 'notistack';
@@ -18,8 +18,8 @@ export default function App() {
                             setMainView(<Ticketsystem />);
                             setIsMainView(true);
                             break;
-                     case "Wiki":
-                            setMainView(<Wiki />);
+                     case "Adminpanel":
+                            setMainView(<Adminpanel />);
                             setIsMainView(false);
                             break;
                      default:

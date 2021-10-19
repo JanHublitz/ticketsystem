@@ -5,6 +5,9 @@
        overflow-y: auto;
        padding-right: 2rem;
        padding-left: 2rem;
+
+       animation: fadeIn 1s;
+
 }
 
 .dialog-settings {
@@ -187,4 +190,14 @@ thead.MuiTableHead-root {
        border-color: var(--blue) !important;
        font-weight: bolder !important;
        margin-right: 3rem !important;
+}
+
+@keyframes fadeIn {
+       0% {
+              opacity: 0;
+       }
+
+       100% {
+              opacity: 1;
+       }
 }

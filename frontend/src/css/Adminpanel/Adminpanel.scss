@@ -1,0 +1,90 @@
+.Adminpanel {
+       width: 100%;
+       height: 100%;
+       display: block;
+       background-color: var(--darkblue);
+       // display: flex;
+       // flex-direction: column;
+       // justify-content: center;
+       animation: fadeIn 1s;
+
+       .Topbar {
+              height: 3.5rem;
+              background-color: var(--darkbluelight);
+              margin-left: 1rem;
+              margin-right: 1rem;
+              margin-top: 1.7rem;
+       }
+
+       .rows-wrapper {
+              margin-top: 2.3rem;
+       }
+
+       .row {
+              display: flex;
+              justify-content: space-evenly;
+
+              .col {
+                     height: 21rem;
+                     display: block;
+
+                     .wrapper {
+                            display: flex;
+                     }
+              }
+
+              .block {
+                     transition: background-color 250ms ease-in-out;
+                     background-color: var(--darkbluelight);
+                     margin-left: 1rem;
+                     margin-right: 1rem;
+                     margin-top: 1rem;
+
+                     &:nth-child(1) {
+                            margin-right: 0;
+                     }
+
+                     &.h {
+                            height: 10rem;
+                            width: auto;
+                     }
+
+                     &.v {
+                            height: auto;
+                            width: 10rem;
+                     }
+
+                     &:hover {
+                            background-color: var(--darkbluelight-hover);
+                     }
+              }
+
+              .b1 {
+                     flex-grow: 1;
+              }
+
+              .b2 {
+                     flex-grow: 2;
+              }
+
+              .b4 {
+                     flex-grow: 4;
+              }
+
+              .b8 {
+                     flex-grow: 8;
+                     height: calc(20rem + 1rem) !important;
+                     margin-left: 0;
+              }
+       }
+}
+
+@keyframes fadeIn {
+       0% {
+              opacity: 0;
+       }
+
+       100% {
+              opacity: 1;
+       }
+}

@@ -1,11 +1,19 @@
 :root {
        --blue: rgb(26, 115, 232);
        --blue2: rgb(26, 115, 232);
-       --darkblue: rgb(0, 0, 92);
        --orange: rgb(255, 155, 23);
        --green: rgb(18, 109, 2);
        --red: rgb(190, 23, 23);
        --purple: rgb(123, 0, 128);
+       --darkblue: rgb(22, 29, 47);
+       --darkbluelight: rgb(41, 47, 69);
+       --darkbluelight-hover: rgb(51, 57, 79);
+
+       --sidebar-backgroundColor: var(--blue);
+       --sidebar-color: black;
+       --sidebar-activeColor: white;
+       --sidebar-hoverColor: white;
+       --sidebar-hoverbackgroundColor: white;
 }
 
 .App {
@@ -31,13 +39,11 @@ body {
        flex-direction: column;
        align-items: center;
        width: 100%;
-       /* border: 5px solid red; */
-       height: calc(100% - 3rem);
+       height: calc(100%);
 }
 
 .main-sidebar-wrapper {
        width: 100%;
        height: 100%;
-       /* border: 5px solid blue; */
        display: flex;
 }
