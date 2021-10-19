@@ -22,6 +22,7 @@
        // border-top-right-radius: 1rem;
        font-family: "Roboto";
 
+
        .user-wrapper {
 
               display: flex;
@@ -59,6 +60,7 @@
               background-color: var(--sidebar-backgroundColor);
 
               .user-wrapper {
+<<<<<<< HEAD
                      color: var(--sidebar-color);
                      background-color: var(--sidebar-activeColor);
                      flex-direction: column;
@@ -68,6 +70,14 @@
                             align-self: center;
                      }
 
+=======
+                     color: white;
+                     background-color: var(--blue);
+                     flex-direction: column;
+                     .account-icon {
+                            margin-left: calc(50% - 27.5px);
+                     }
+>>>>>>> f7431a4b6e6b0408fc30ec9a4cdc3eb6a3d6fd3e
                      span {
                             font-size: 9px;
                             align-self: center;
@@ -81,6 +91,7 @@
               }
 
               .item {
+<<<<<<< HEAD
                      transition: all 0.5s cubic-bezier(0.02, 0.92, 0.65, 0.5);
                      flex-direction: column;
                      color: var(--sidebar-color);
@@ -88,6 +99,14 @@
                      align-items: stretch;
                      padding-left: 0;
                      margin-top: 1rem;
+=======
+                     transition: all 0.5s cubic-bezier(.02, .92, .65, .5);
+                     flex-direction:column;
+                     color: black;
+                     justify-content: center;
+                     align-items: stretch;
+                     padding-left: 0;
+>>>>>>> f7431a4b6e6b0408fc30ec9a4cdc3eb6a3d6fd3e
 
                      .text {
                             width: auto;
@@ -96,11 +115,18 @@
                             margin-left: 0;
                             margin-top: 0.25rem;
                      }
+<<<<<<< HEAD
 
                      .icon {
                             margin-top: 0.5rem;
                             margin-left: calc(50% - 15px);
                             color: var(--sidebar-sidebar-color);
+=======
+                     .icon {
+                            margin-top: 0.5rem;
+                            margin-left: calc(50% - 15px);
+                            color: black;
+>>>>>>> f7431a4b6e6b0408fc30ec9a4cdc3eb6a3d6fd3e
                      }
 
                      &.active {
@@ -140,6 +166,11 @@
                                    color: white;
                             }
 
+                            .text 
+                            {
+                                   color: white;
+                            }
+
                             .icon {
                                    color: white;
                             }
@@ -159,7 +190,11 @@
               margin-top: 1rem;
               margin-bottom: 2rem;
               transition: transform 500ms ease-in-out;
+<<<<<<< HEAD
               color: var(--sidebar-color);
+=======
+              color: white;
+>>>>>>> f7431a4b6e6b0408fc30ec9a4cdc3eb6a3d6fd3e
 
               &.left {
                      transform: rotate(-180deg);
@@ -256,6 +291,19 @@
               }
        }
 
+<<<<<<< HEAD
+}
+
+@keyframes fadeIn {
+       0% {
+              opacity: 0;
+       }
+=======
+>>>>>>> f7431a4b6e6b0408fc30ec9a4cdc3eb6a3d6fd3e
+
+       100% {
+              opacity: 1;
+       }
 }
 
 @keyframes fadeIn {
